@@ -7,6 +7,7 @@ import 'package:evently/common/custom_text_styles.dart';
 import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/common/widgets/custom_main_outlined_button.dart';
 import 'package:evently/common/widgets/localization_switch.dart';
+import 'package:evently/home/screens/home_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -72,7 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: CustomMainButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                          HomeScreen.routeName); //TODO:edit to pushReplacement
+                    },
                     buttonTitle: 'Login'), //ToDo: localization
               ),
               RichText(

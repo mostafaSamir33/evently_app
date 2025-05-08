@@ -26,9 +26,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
       decoration: InputDecoration(
           prefixIcon: Padding(
             padding: const EdgeInsets.all(16),
-            child: SvgPicture.asset(widget.prefixIcon ?? ''),
+            child: SvgPicture.asset(
+              widget.prefixIcon ?? '',
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).shadowColor, BlendMode.srcIn),
+            ),
           ),
-          prefixIconColor: Theme.of(context).splashColor,
+          prefixIconColor: Theme.of(context).shadowColor,
           suffixIcon: widget.isPassword == true
               ? GestureDetector(
                   onTap: () {
@@ -39,11 +43,12 @@ class _AuthTextFieldState extends State<AuthTextField> {
                       ? Icon(Icons.visibility_off_outlined)
                       : Icon(Icons.visibility_outlined))
               : null,
+          suffixIconColor: Theme.of(context).shadowColor,
           hintText: widget.hintText,
           hintStyle: Theme.of(context)
               .textTheme
               .labelMedium!
-              .copyWith(color: Theme.of(context).splashColor),
+              .copyWith(color: Theme.of(context).shadowColor),
           border: customBorder(),
           enabledBorder: customBorder(),
           focusedBorder: customBorder(focusColor: AppColors.mainColor),

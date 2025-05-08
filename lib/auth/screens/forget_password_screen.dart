@@ -10,9 +10,8 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -43,7 +42,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 prefixIcon: AppImages.emailIcon,
               ),
             ),
-            CustomMainButton(onPressed: (){}, buttonTitle: 'Reset Password')
+            CustomMainButton(onPressed: () {}, buttonTitle: 'Reset Password')
           ],
         ),
       ),

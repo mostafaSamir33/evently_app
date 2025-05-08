@@ -12,4 +12,11 @@ class AppImages {
       'assets/images/auth_images/english_icon.png';
   static const String forgetPasswordScreenImage =
       'assets/images/auth_images/forget_password_screen_image.png';
+  static const String sportImage = 'assets/images/home_images/sport_image.png';
+  static const String birthdayImage =
+      'assets/images/home_images/birthday_image.png';
+  static const String bookClubImage =
+      'assets/images/home_images/bookclub_image.png';
+  static const String routeImage =
+      'assets/images/home_images/route_image.png';
 }
