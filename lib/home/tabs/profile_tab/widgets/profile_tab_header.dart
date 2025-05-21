@@ -1,7 +1,11 @@
+import 'package:evently/auth/screens/login_screen.dart';
 import 'package:evently/common/app_assets.dart';
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/user_auth_provider.dart';
 
 class ProfileTabHeader extends StatelessWidget {
   const ProfileTabHeader({super.key});
@@ -38,7 +42,7 @@ class ProfileTabHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'John Safwat',
+                    context.read<UserAuthProvider>().userModel?.name??'',
                     style: CustomTextStyles.style18w700Black.copyWith(
                         color: Theme.of(context).splashColor, fontSize: 24),
                   ),
@@ -46,7 +50,7 @@ class ProfileTabHeader extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'johnsafwat.route@gmail.com',
+                    context.read<UserAuthProvider>().userModel?.email??'',
                     style: CustomTextStyles.style16w500Black
                         .copyWith(color: Theme.of(context).splashColor),
                   ),

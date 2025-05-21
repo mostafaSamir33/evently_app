@@ -1,4 +1,6 @@
+import 'package:evently/providers/localization_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../app_assets.dart';
 import '../app_colors.dart';
@@ -11,14 +13,17 @@ class LocalizationSwitch extends StatefulWidget {
 }
 
 class _LocalizationSwitchState extends State<LocalizationSwitch> {
-  bool switchValue = false;
-
   @override
   Widget build(BuildContext context) {
+    bool switchValue =
+        context.read<LocalizationProvider>().appLocalization == 'en'
+            ? false
+            : true;
     return Switch(
       value: switchValue,
       onChanged: (value) {
-        switchValue = value;
+        switchValue = !switchValue;
+        context.read<LocalizationProvider>().changeLocalization();
         setState(() {});
       },
       activeThumbImage: AssetImage(AppImages.arabicIcon),

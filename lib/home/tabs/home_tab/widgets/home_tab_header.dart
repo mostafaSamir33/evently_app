@@ -1,7 +1,11 @@
 import 'package:evently/models/category_slider_model.dart';
+import 'package:evently/providers/home_tab_provider.dart';
+import 'package:evently/providers/localization_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
+import 'package:evently/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../common/widgets/categories_slider.dart';
 
@@ -13,11 +17,10 @@ class HomeTabHeader extends StatefulWidget {
 }
 
 class _HomeTabHeaderState extends State<HomeTabHeader> {
-  CategoryValues selectedId =
-      CategorySliderModel.homeTabCategory.first.categoryValues;
-
   @override
   Widget build(BuildContext context) {
+    CategoryValues? selectedId =
+        context.watch<HomeTabProvider>().selectedCategory;
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).highlightColor,
@@ -38,15 +41,15 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Welcome Back ✨', //TODO:localization
+                          AppLocalizations.of(context)!.welcomeBack,
                           style: Theme.of(context)
                               .textTheme
                               .labelSmall!
                               .copyWith(color: Theme.of(context).splashColor),
                         ),
                         Text(
-                          'John Safwat',
-                          //TODO:localization //TODO:edit to user name
+                          context.watch<UserAuthProvider>().userModel?.name ??
+                              '',
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge!
@@ -80,7 +83,11 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                           height: 35,
                           width: 35,
                           child: FilledButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context
+                                  .read<LocalizationProvider>()
+                                  .changeLocalization();
+                            },
                             style: FilledButton.styleFrom(
                               backgroundColor: Theme.of(context).splashColor,
                               shape: RoundedRectangleBorder(
@@ -89,7 +96,10 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                               overlayColor: Theme.of(context).splashColor,
                             ),
                             child: Text(
-                              'EN', //TODO:localization
+                              context
+                                  .watch<LocalizationProvider>()
+                                  .getAppLocaleString()
+                                  .toUpperCase(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -125,10 +135,10 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
               Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16),
                 child: CategoriesSlider(
+                  isHomeTabCategory: true,
                   categoryValues: selectedId,
                   onSelect: (p0) {
-                    selectedId = p0;
-                    setState(() {});
+                    context.read<HomeTabProvider>().editSelectedCategory(p0);
                   },
                 ),
               )

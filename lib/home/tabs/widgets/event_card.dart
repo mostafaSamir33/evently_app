@@ -1,8 +1,11 @@
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
+import 'package:evently/common/services/firebase_services.dart';
 import 'package:evently/models/event_data_model.dart';
+import 'package:evently/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventCard extends StatelessWidget {
   final EventDataModel eventDataModel;
@@ -26,7 +29,8 @@ class EventCard extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              eventDataModel.categoryValues.getImage(),
+              eventDataModel.categoryValues.getImage(
+                  context.watch<ThemeProvider>().themeMode == ThemeMode.dark),
               height: height * 0.26,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -81,18 +85,44 @@ class EventCard extends StatelessWidget {
                           eventDataModel.title,
                           style: Theme.of(context).textTheme.titleSmall,
                         )),
-                    Icon(
-                      eventDataModel.isFavourite
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined,
-                      color: AppColors.mainColor,
-                    )
+                    FavButton(eventDataModel: eventDataModel)
                   ],
                 ),
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FavButton extends StatefulWidget {
+  const FavButton({
+    super.key,
+    required this.eventDataModel,
+  });
+
+  final EventDataModel eventDataModel;
+
+  @override
+  State<FavButton> createState() => _FavButtonState();
+}
+
+class _FavButtonState extends State<FavButton> {
+  late bool favValue = widget.eventDataModel.isFavourite;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        favValue = !favValue;
+        setState(() {});
+        FirebaseServices.changeEventFav(widget.eventDataModel, favValue);
+      },
+      child: Icon(
+        favValue ? Icons.favorite : Icons.favorite_border_outlined,
+        color: AppColors.mainColor,
       ),
     );
   }
