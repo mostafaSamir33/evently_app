@@ -11,13 +11,4 @@ class ThemeProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // changeAppThemeForDropDownMenu(value) {
-  //   if(value==ThemeMode.light){
-  //     themeMode=ThemeMode.light;
-  //   }else{
-  //     themeMode=ThemeMode.dark;
-  //   }
-  //   notifyListeners();
-  // }
 }

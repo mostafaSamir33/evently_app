@@ -1,6 +1,12 @@
+import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/home/tabs/home_tab/home_tab.dart';
+import 'package:evently/home/tabs/love_tab/love_tab.dart';
 import 'package:evently/home/tabs/profile_tab/profile_tab.dart';
+import 'package:evently/providers/user_auth_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/homeScreen';
@@ -12,8 +18,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> tabs = [HomeTab(), Placeholder(), Placeholder(), ProfileTab()];
+  List<Widget> tabs = [HomeTab(), Placeholder(), LoveTab(), ProfileTab()];
   int index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (context.read<UserAuthProvider>().userModel == null &&
+        FirebaseAuth.instance.currentUser != null) {
+      context.read<UserAuthProvider>().getUser();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
           border: Border.all(color: Theme.of(context).splashColor, width: 5),
         ),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(CreateEventScreen.routeName);
+          },
           shape: CircleBorder(),
           backgroundColor: Theme.of(context).highlightColor,
           splashColor: Theme.of(context).splashColor,
@@ -58,28 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Icon(Icons.home_outlined),
                 ),
-                label: 'Home'), //TODO:localization
+                label: AppLocalizations.of(context)!.home),
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.location_on),
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Icon(Icons.location_on_outlined),
                 ),
-                label: 'Map'), //TODO:localization
+                label: AppLocalizations.of(context)!.map),
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.favorite),
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Icon(Icons.favorite_border_outlined),
                 ),
-                label: 'Love'), //TODO:localization
+                label: AppLocalizations.of(context)!.love),
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.person_rounded),
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Icon(Icons.person_outline_rounded),
                 ),
-                label: 'profile') //TODO:localization
+                label: AppLocalizations.of(context)!.profile)
           ],
         ),
       ),

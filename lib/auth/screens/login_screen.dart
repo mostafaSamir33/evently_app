@@ -8,9 +8,12 @@ import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/common/widgets/custom_main_outlined_button.dart';
 import 'package:evently/common/widgets/localization_switch.dart';
 import 'package:evently/home/screens/home_screen.dart';
+import 'package:evently/providers/user_auth_provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/loginScreen';
@@ -22,111 +25,198 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController? emailController = TextEditingController();
+  TextEditingController? passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 24),
-                child: Image.asset(
-                  AppImages.splashScreenLogo,
-                  height: height * 0.22,
-                ),
-              ),
-              AuthTextField(
-                prefixIcon: AppImages.emailIcon,
-                hintText: 'Email', //ToDo: localization
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: AuthTextField(
-                  prefixIcon: AppImages.passwordIcon,
-                  hintText: 'Password', //ToDo: localization
-                  isPassword: true,
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(ForgetPasswordScreen.routeName);
-                  },
-                  child: Text(
-                    'Forget Password?', //TODO: localization
-                    style: CustomTextStyles.style16w700Black.copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.mainColor,
-                        color: AppColors.mainColor,
-                        fontStyle: FontStyle.italic),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: Image.asset(
+                      AppImages.splashScreenLogo,
+                      height: height * 0.22,
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: CustomMainButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                          HomeScreen.routeName); //TODO:edit to pushReplacement
+                  AuthTextField(
+                    controller: emailController,
+                    validator: (p0) {
+                      final RegExp emailRegex = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@"
+                          r"[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
+                          r"(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+                      if (p0 == null || p0.isEmpty) {
+                        return AppLocalizations.of(context)!
+                            .theFieldCanNotBeEmpty;
+                      } else if (!emailRegex.hasMatch(p0)) {
+                        return AppLocalizations.of(context)!.invalidEmail;
+                      } else {
+                        return null;
+                      }
                     },
-                    buttonTitle: 'Login'), //ToDo: localization
-              ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                        text: "Don't Have Account ? ", //ToDo: localization
-                        style: Theme.of(context).textTheme.labelMedium),
-                    TextSpan(
-                      text: 'Create Account', //ToDo: localization
-                      style: CustomTextStyles.style16w700Black.copyWith(
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColors.mainColor,
-                          color: AppColors.mainColor,
-                          fontStyle: FontStyle.italic),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.of(context)
-                              .pushNamed(SignupScreen.routeName);
-                        },
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                    prefixIcon: AppImages.emailIcon,
+                    hintText: AppLocalizations.of(context)!.email,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: AuthTextField(
+                      controller: passwordController,
+                      validator: (p0) {
+                        final RegExp passwordRegex = RegExp(
+                            r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+                        if (p0 == null || p0.isEmpty) {
+                          return AppLocalizations.of(context)!
+                              .theFieldCanNotBeEmpty;
+                        } else if (!passwordRegex.hasMatch(p0)) {
+                          return AppLocalizations.of(context)!.invalidEmail;
+                        } else {
+                          return null;
+                        }
+                      },
+                      prefixIcon: AppImages.passwordIcon,
+                      hintText: AppLocalizations.of(context)!.password,
+                      isPassword: true,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(ForgetPasswordScreen.routeName);
+                      },
                       child: Text(
-                        'Or', //TODO:localization
-                        style: CustomTextStyles.style16w500Black
-                            .copyWith(color: AppColors.mainColor),
+                        AppLocalizations.of(context)!.forgetPassword1,
+                        style: CustomTextStyles.style16w700Black.copyWith(
+                            decoration: TextDecoration.underline,
+                            decorationColor: AppColors.mainColor,
+                            color: AppColors.mainColor,
+                            fontStyle: FontStyle.italic),
                       ),
                     ),
-                    Expanded(child: Divider())
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: context.watch<UserAuthProvider>().loading
+                        ? SizedBox(
+                            height: 56,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        : CustomMainButton(
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                context
+                                    .read<UserAuthProvider>()
+                                    .userLogin(
+                                        email: emailController!.text.trim(),
+                                        password: passwordController!.text)
+                                    .then(
+                                  (value) {
+                                    if (value == null) {
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              HomeScreen.routeName);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                          AppLocalizations.of(context)!
+                                              .userLoggedInSuccessfully(context
+                                                      .read<UserAuthProvider>()
+                                                      .userModel
+                                                      ?.name ??
+                                                  ''),
+                                          style:
+                                              CustomTextStyles.style18w500White,
+                                        ),
+                                        backgroundColor: Colors.green,
+                                        duration: Duration(seconds: 5),
+                                        showCloseIcon: true,
+                                      ));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                          value,
+                                          style:
+                                              CustomTextStyles.style18w500White,
+                                        ),
+                                        backgroundColor: Colors.red,
+                                        duration: Duration(seconds: 5),
+                                        showCloseIcon: true,
+                                      ));
+                                    }
+                                  },
+                                );
+                              }
+                            },
+                            buttonTitle: AppLocalizations.of(context)!.login),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text:
+                                AppLocalizations.of(context)!.doNotHaveAccount,
+                            style: Theme.of(context).textTheme.labelMedium),
+                        TextSpan(
+                          text: AppLocalizations.of(context)!.createAccount,
+                          style: CustomTextStyles.style16w700Black.copyWith(
+                              decoration: TextDecoration.underline,
+                              decorationColor: AppColors.mainColor,
+                              color: AppColors.mainColor,
+                              fontStyle: FontStyle.italic),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context)
+                                  .pushNamed(SignupScreen.routeName);
+                            },
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            AppLocalizations.of(context)!.or,
+                            style: CustomTextStyles.style16w500Black
+                                .copyWith(color: AppColors.mainColor),
+                          ),
+                        ),
+                        Expanded(child: Divider())
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: CustomMainOutlinedButton(
+                      onPressed: () {},
+                      buttonTitle:
+                          AppLocalizations.of(context)!.loginWithGoogle,
+                      icon: SvgPicture.asset(AppImages.googleIcon),
+                    ),
+                  ),
+                  LocalizationSwitch()
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 24),
-                child: CustomMainOutlinedButton(
-                  onPressed: () {},
-                  buttonTitle: 'Login With Google', //TODO:localization
-                  icon: SvgPicture.asset(AppImages.googleIcon),
-                ),
-              ),
-              LocalizationSwitch()
-            ],
+            ),
           ),
         ),
       ),

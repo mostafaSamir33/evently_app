@@ -27,6 +27,25 @@ class CategorySliderModel {
             title: CategoryValues.bookClub.toTitle(),
             icon: Icons.menu_book_outlined),
       ];
+
+  static List<CategorySliderModel> get createEventScreenCategory => [
+        CategorySliderModel(
+            categoryValues: CategoryValues.bookClub,
+            title: CategoryValues.bookClub.toTitle(),
+            icon: Icons.menu_book_outlined),
+        CategorySliderModel(
+            categoryValues: CategoryValues.sport,
+            title: CategoryValues.sport.toTitle(),
+            icon: Icons.directions_bike_outlined),
+        CategorySliderModel(
+            categoryValues: CategoryValues.birthday,
+            title: CategoryValues.birthday.toTitle(),
+            icon: Icons.cake_outlined),
+        CategorySliderModel(
+            categoryValues: CategoryValues.all,
+            title: CategoryValues.all.toTitle(),
+            icon: Icons.explore_outlined),
+      ];
 }
 
 enum CategoryValues {
@@ -39,16 +58,40 @@ enum CategoryValues {
     return name[0].toUpperCase() + name.substring(1);
   }
 
-  String getImage() {
+  String getImage(bool? isDark) {
     switch (this) {
       case CategoryValues.all:
-        return '';
+        return isDark == true
+            ? AppImages.allImageDark
+            : AppImages.allImageLight;
       case CategoryValues.sport:
-        return AppImages.sportImage;
+        return isDark == true
+            ? AppImages.sportImageDark
+            : AppImages.sportImageLight;
       case CategoryValues.birthday:
-        return AppImages.birthdayImage;
+        return isDark == true
+            ? AppImages.birthdayImageDark
+            : AppImages.birthdayImageLight;
       case CategoryValues.bookClub:
-        return AppImages.bookClubImage;
+        return isDark == true
+            ? AppImages.bookClubImageDark
+            : AppImages.bookClubImageLight;
+    }
+  }
+
+  String toJson() {
+    return name;
+  }
+
+ static CategoryValues fromJson(String json) {
+    if (json == sport.name) {
+      return sport;
+    } else if (json == birthday.name) {
+      return birthday;
+    } else if (json == bookClub.name) {
+      return bookClub;
+    } else {
+      return all;
     }
   }
 }

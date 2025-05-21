@@ -6,9 +6,16 @@ class AuthTextField extends StatefulWidget {
   final String? prefixIcon;
   final String? hintText;
   final bool? isPassword;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   const AuthTextField(
-      {super.key, this.hintText, this.prefixIcon, this.isPassword});
+      {super.key,
+      this.hintText,
+      this.prefixIcon,
+      this.isPassword,
+      this.controller,
+      this.validator});
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -20,6 +27,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
+      validator: widget.validator,
       cursorColor: Theme.of(context).splashColor,
       obscureText: isObscure,
       style: Theme.of(context).textTheme.labelMedium,

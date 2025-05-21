@@ -2,6 +2,7 @@ import 'package:evently/auth/widgets/auth_text_field.dart';
 import 'package:evently/common/app_assets.dart';
 import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   static const String routeName = '/forgetPasswordScreen';
@@ -23,7 +24,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Forget Password', //TODO:localization
+          AppLocalizations.of(context)!.forgetPassword2,
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
@@ -38,11 +39,13 @@ class ForgetPasswordScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: AuthTextField(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 prefixIcon: AppImages.emailIcon,
               ),
             ),
-            CustomMainButton(onPressed: () {}, buttonTitle: 'Reset Password')
+            CustomMainButton(
+                onPressed: () {},
+                buttonTitle: AppLocalizations.of(context)!.resetPassword)
           ],
         ),
       ),
