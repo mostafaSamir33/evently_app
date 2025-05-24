@@ -1,8 +1,9 @@
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/custom_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomTextField extends StatelessWidget {
   final String title;

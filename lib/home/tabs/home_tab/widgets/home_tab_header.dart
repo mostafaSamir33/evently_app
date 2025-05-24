@@ -1,3 +1,5 @@
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_slider_model.dart';
 import 'package:evently/providers/home_tab_provider.dart';
 import 'package:evently/providers/localization_provider.dart';
@@ -5,8 +7,6 @@ import 'package:evently/providers/theme_provider.dart';
 import 'package:evently/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../common/widgets/categories_slider.dart';
 
 class HomeTabHeader extends StatefulWidget {
@@ -114,7 +114,7 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, left: 16),
+                padding: const EdgeInsets.only(top: 8, left: 16,right: 16),
                 child: Row(
                   children: [
                     Icon(

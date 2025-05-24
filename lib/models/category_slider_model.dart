@@ -9,42 +9,36 @@ class CategorySliderModel {
   CategorySliderModel(
       {required this.categoryValues, required this.title, required this.icon});
 
-  static List<CategorySliderModel> get homeTabCategory => [
+  static List<CategorySliderModel> get homeTabCategory {
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   var isEnglish= context.watch<ThemeProvider>().themeMode ==
+    //       ThemeMode.dark
+    // });
+    return [
         CategorySliderModel(
             categoryValues: CategoryValues.all,
-            title: CategoryValues.all.toTitle(),
+            title: CategoryValues.all.name,
             icon: Icons.explore_outlined),
         CategorySliderModel(
             categoryValues: CategoryValues.sport,
-            title: CategoryValues.sport.toTitle(),
+            title: CategoryValues.sport.name,
             icon: Icons.directions_bike_outlined),
         CategorySliderModel(
             categoryValues: CategoryValues.birthday,
-            title: CategoryValues.birthday.toTitle(),
+            title: CategoryValues.birthday.name,
             icon: Icons.cake_outlined),
         CategorySliderModel(
             categoryValues: CategoryValues.bookClub,
-            title: CategoryValues.bookClub.toTitle(),
+            title: CategoryValues.bookClub.name,
             icon: Icons.menu_book_outlined),
       ];
+  }
 
   static List<CategorySliderModel> get createEventScreenCategory => [
         CategorySliderModel(
             categoryValues: CategoryValues.bookClub,
-            title: CategoryValues.bookClub.toTitle(),
+            title: CategoryValues.bookClub.name,
             icon: Icons.menu_book_outlined),
-        CategorySliderModel(
-            categoryValues: CategoryValues.sport,
-            title: CategoryValues.sport.toTitle(),
-            icon: Icons.directions_bike_outlined),
-        CategorySliderModel(
-            categoryValues: CategoryValues.birthday,
-            title: CategoryValues.birthday.toTitle(),
-            icon: Icons.cake_outlined),
-        CategorySliderModel(
-            categoryValues: CategoryValues.all,
-            title: CategoryValues.all.toTitle(),
-            icon: Icons.explore_outlined),
       ];
 }
 
@@ -58,40 +52,16 @@ enum CategoryValues {
     return name[0].toUpperCase() + name.substring(1);
   }
 
-  String getImage(bool? isDark) {
+  String getImage() {
     switch (this) {
       case CategoryValues.all:
-        return isDark == true
-            ? AppImages.allImageDark
-            : AppImages.allImageLight;
+        return '';
       case CategoryValues.sport:
-        return isDark == true
-            ? AppImages.sportImageDark
-            : AppImages.sportImageLight;
+        return AppImages.sportImage;
       case CategoryValues.birthday:
-        return isDark == true
-            ? AppImages.birthdayImageDark
-            : AppImages.birthdayImageLight;
+        return AppImages.birthdayImage;
       case CategoryValues.bookClub:
-        return isDark == true
-            ? AppImages.bookClubImageDark
-            : AppImages.bookClubImageLight;
-    }
-  }
-
-  String toJson() {
-    return name;
-  }
-
- static CategoryValues fromJson(String json) {
-    if (json == sport.name) {
-      return sport;
-    } else if (json == birthday.name) {
-      return birthday;
-    } else if (json == bookClub.name) {
-      return bookClub;
-    } else {
-      return all;
+        return AppImages.bookClubImage;
     }
   }
 }
