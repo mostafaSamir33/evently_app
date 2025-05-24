@@ -4,32 +4,30 @@ import 'package:evently/common/services/firebase_services.dart';
 import 'package:evently/common/widgets/categories_slider.dart';
 import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/events/widgets/custom_text_field.dart';
+import 'package:evently/home/screens/home_screen.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:evently/models/category_slider_model.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/theme_provider.dart';
 
-class CreateEventScreen extends StatefulWidget {
-  static const String routeName = '/CreateEventScreen';
+class EditEventScreen extends StatefulWidget {
+  static const String routeName = '/EditEventScreen';
 
-  const CreateEventScreen({super.key});
+  const EditEventScreen({super.key});
 
   @override
-  State<CreateEventScreen> createState() => _CreateEventScreenState();
+  State<EditEventScreen> createState() => _EditEventScreenState();
 }
 
-class _CreateEventScreenState extends State<CreateEventScreen> {
-  CategoryValues selectedId =
-      CategorySliderModel.createEventScreenCategory.first.categoryValues;
+class _EditEventScreenState extends State<EditEventScreen> {
+  bool isDataInitialized = false;
 
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController? titleController;
+  TextEditingController? descriptionController;
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -60,14 +58,26 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    EventDataModel eventDataModel =
+        ModalRoute.of(context)?.settings.arguments as EventDataModel;
+    if (!isDataInitialized) {
+      titleController = TextEditingController(text: eventDataModel.title);
+      descriptionController =
+          TextEditingController(text: eventDataModel.description);
+      selectedDate = eventDataModel.dateTime;
+      selectedTime = TimeOfDay(
+          hour: eventDataModel.dateTime.hour,
+          minute: eventDataModel.dateTime.minute);
+      isDataInitialized = true;
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.createEvent),
+        title: Text(AppLocalizations.of(context)!.editEvent),
       ),
       body: Form(
         key: formKey,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: [
               Padding(
@@ -75,7 +85,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
-                    selectedId.getImage(
+                    eventDataModel.categoryValues.getImage(
                         context.watch<ThemeProvider>().themeMode ==
                             ThemeMode.dark),
                     height: height * 0.24,
@@ -86,16 +96,16 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               ),
               CategoriesSlider(
                 isHomeTabCategory: false,
-                categoryValues: selectedId,
+                categoryValues: eventDataModel.categoryValues,
                 onSelect: (p0) {
-                  selectedId = p0;
+                  eventDataModel.categoryValues = p0;
                   setState(() {});
                 },
               ),
               CustomTextField(
                 title: AppLocalizations.of(context)!.title,
                 hintText: AppLocalizations.of(context)!.eventTitle,
-                controller: titleController,
+                controller: titleController ?? TextEditingController(),
                 prefixIcon: Icon(
                   Icons.edit_rounded,
                   color: titleFocusNode.hasFocus
@@ -107,7 +117,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               CustomTextField(
                 title: AppLocalizations.of(context)!.description,
                 hintText: AppLocalizations.of(context)!.eventDescription,
-                controller: descriptionController,
+                controller: descriptionController ?? TextEditingController(),
                 maxLines: 3,
                 focusNode: descriptionFocusNode,
               ),
@@ -128,15 +138,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     ),
                     Spacer(),
                     TextButton(
-                      onPressed: () {
-                        selectDate();
+                      onPressed: () async {
+                        await selectDate();
                       },
                       style: TextButton.styleFrom(padding: EdgeInsets.zero),
                       child: Text(
-                        selectedDate == null
-                            ? AppLocalizations.of(context)!.chooseDate
-                            : DateFormat('dd/MM/yyyy').format(selectedDate!),
-
+                        DateFormat('dd/MM/yyyy').format(selectedDate!),
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
@@ -161,14 +168,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   ),
                   Spacer(),
                   TextButton(
-                    onPressed: () {
-                      selectTime();
+                    onPressed: () async {
+                      await selectTime();
                     },
                     style: TextButton.styleFrom(padding: EdgeInsets.zero),
                     child: Text(
-                      selectedTime == null
-                          ? AppLocalizations.of(context)!.chooseTime
-                          : '${selectedTime!.hour}:${selectedTime!.minute} ${selectedTime!.period.name}',
+                      '${selectedTime!.hour}:${selectedTime!.minute} ${selectedTime!.period.name}',
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -209,7 +214,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           width: 8,
                         ),
                         Text(
-                          AppLocalizations.of(context)!.chooseEventLocation,
+                          'cairo , Egypt',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -237,7 +242,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                             child: Text(error),
                           )
                         : CustomMainButton(
-                            onPressed: () async {
+                            onPressed: () {
                               if (formKey.currentState!.validate() &&
                                   selectedDate != null &&
                                   selectedTime != null) {
@@ -245,22 +250,26 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                 setState(() {});
                                 try {
                                   selectedDate = selectedDate!.copyWith(
-
                                       hour: selectedTime!.hour,
                                       minute: selectedTime!.minute);
-                                  EventDataModel eventDataModel =
+                                  EventDataModel editedEventDataModel =
                                       EventDataModel(
-                                          title: titleController.text.trim(),
-                                          description:
-                                              descriptionController.text.trim(),
+                                          title: titleController?.text.trim() ??
+                                              '',
+                                          description: descriptionController
+                                                  ?.text
+                                                  .trim() ??
+                                              '',
                                           dateTime: selectedDate!,
-                                          categoryValues: selectedId);
-                                  FirebaseServices.addNewEvent(eventDataModel);
+                                          categoryValues:
+                                              eventDataModel.categoryValues);
+                                  FirebaseServices.editEvent(
+                                      editedEventDataModel);
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                     content: Text(
                                       AppLocalizations.of(context)!
-                                          .theEventIsAddedSuccessfully,
+                                          .theEventIsEditedSuccessfully,
                                       style: CustomTextStyles.style18w500White,
                                     ),
                                     backgroundColor: Colors.green,
@@ -269,7 +278,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                   ));
                                   state = 'done';
                                   setState(() {});
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pushReplacementNamed(
+                                      HomeScreen.routeName);
                                 } catch (e) {
                                   error = e.toString();
                                   state = 'error';
@@ -290,7 +300,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                 ));
                               }
                             },
-                            buttonTitle: AppLocalizations.of(context)!.addEvent,
+                            buttonTitle:
+                                AppLocalizations.of(context)!.updateEvent,
                           ),
               )
             ],
@@ -303,7 +314,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   Future<void> selectDate() async {
     final DateTime? pickDate = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime(2030));
     if (pickDate != null) {

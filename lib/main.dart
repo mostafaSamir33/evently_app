@@ -5,7 +5,10 @@ import 'package:evently/common/app_constants.dart';
 import 'package:evently/common/app_prefs.dart';
 import 'package:evently/common/app_themes.dart';
 import 'package:evently/events/screens/create_event_screen.dart';
+import 'package:evently/events/screens/edit_event_screen.dart';
 import 'package:evently/home/screens/home_screen.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/onboarding/screens/onboarding_screen_1.dart';
 import 'package:evently/onboarding/screens/onboarding_screen_2.dart';
 import 'package:evently/providers/localization_provider.dart';
@@ -14,10 +17,10 @@ import 'package:evently/providers/user_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'events/screens/event_details_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -66,6 +69,8 @@ class MyApp extends StatelessWidget {
         CreateEventScreen.routeName: (_) => CreateEventScreen(),
         OnboardingScreen1.routeName: (_) => OnboardingScreen1(),
         OnboardingScreen2.routeName: (_) => OnboardingScreen2(),
+        EventDetailsScreen.routeName: (_) => EventDetailsScreen(),
+        EditEventScreen.routeName: (_) => EditEventScreen(),
       },
       initialRoute:
           AppPrefs.onboardingGetBool(AppConstants.onboardingKey) == null

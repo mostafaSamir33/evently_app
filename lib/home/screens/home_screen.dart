@@ -2,10 +2,11 @@ import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/home/tabs/home_tab/home_tab.dart';
 import 'package:evently/home/tabs/love_tab/love_tab.dart';
 import 'package:evently/home/tabs/profile_tab/profile_tab.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

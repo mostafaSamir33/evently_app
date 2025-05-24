@@ -1,7 +1,9 @@
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
 import 'package:evently/models/category_slider_model.dart';
+import 'package:evently/providers/localization_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesSlider extends StatelessWidget {
   final bool isHomeTabCategory;
@@ -16,6 +18,8 @@ class CategoriesSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isEnglish =
+        context.watch<LocalizationProvider>().appLocalization == 'en';
     return SizedBox(
       height: 50,
       child: ListView.separated(
@@ -67,7 +71,15 @@ class CategoriesSlider extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      currentCategoryModel.title,
+                      currentCategoryModel.title == CategoryValues.all.name
+                          ? CategoryValues.all.getName(isEnglish)
+                          : currentCategoryModel.title ==
+                                  CategoryValues.birthday.name
+                              ? CategoryValues.birthday.getName(isEnglish)
+                              : currentCategoryModel.title ==
+                                      CategoryValues.sport.name
+                                  ? CategoryValues.sport.getName(isEnglish)
+                                  : CategoryValues.bookClub.getName(isEnglish),
                       style: CustomTextStyles.style16w500Black.copyWith(
                         color: currentCategoryModel.categoryValues ==
                                     categoryValues &&
