@@ -88,6 +88,25 @@ class FirebaseServices {
         .update({'isFavourite': favValue});
   }
 
+  //delete event
+  static Future<void> deleteEvent(EventDataModel eventDataModel) async {
+    CollectionReference<EventDataModel> eventsCollection =
+        getEventsCollection();
+    await eventsCollection.doc(eventDataModel.id).delete();
+  }
+
+//update event
+  static Future<void> editEvent(EventDataModel eventDataModel) async {
+    CollectionReference<EventDataModel> eventsCollection =
+        getEventsCollection();
+    await eventsCollection.doc(eventDataModel.id).update(eventDataModel.toJson()
+        // 'title': eventDataModel.title,
+        // 'description': eventDataModel.description,
+        // 'categoryValues': eventDataModel.categoryValues,
+        // 'dateTime': eventDataModel.dateTime
+        );
+  }
+
 //firebase authentication
   static Future<UserModel> registerUser(
       {required String email,
@@ -133,7 +152,4 @@ class FirebaseServices {
     DocumentSnapshot<UserModel> document = await usersCollection.doc(uid).get();
     return document.data();
   }
-
-
-
 }

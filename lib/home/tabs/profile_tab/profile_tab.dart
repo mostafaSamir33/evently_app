@@ -4,9 +4,10 @@ import 'package:evently/common/custom_text_styles.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/custom_drop_down_button.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/custom_drop_down_menu.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/profile_tab_header.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/localization_provider.dart';
