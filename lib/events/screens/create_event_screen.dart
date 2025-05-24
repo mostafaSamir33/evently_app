@@ -9,6 +9,7 @@ import 'package:evently/models/category_slider_model.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -135,6 +136,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                         selectedDate == null
                             ? AppLocalizations.of(context)!.chooseDate
                             : DateFormat('dd/MM/yyyy').format(selectedDate!),
+
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
@@ -243,6 +245,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                 setState(() {});
                                 try {
                                   selectedDate = selectedDate!.copyWith(
+
                                       hour: selectedTime!.hour,
                                       minute: selectedTime!.minute);
                                   EventDataModel eventDataModel =

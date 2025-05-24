@@ -69,6 +69,7 @@ class EventCard extends StatelessWidget {
                       ],
                     ),
                   ),
+
                 ),
               ),
               Positioned(
@@ -98,6 +99,7 @@ class EventCard extends StatelessWidget {
               )
             ],
           ),
+
         ),
       ),
     );

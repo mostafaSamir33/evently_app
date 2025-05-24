@@ -50,6 +50,7 @@ class CategorySliderModel {
         CategorySliderModel(
             categoryValues: CategoryValues.all,
             title: CategoryValues.all.name,
+
             icon: Icons.explore_outlined),
       ];
 }

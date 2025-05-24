@@ -107,6 +107,7 @@ class FirebaseServices {
         );
   }
 
+
 //firebase authentication
   static Future<UserModel> registerUser(
       {required String email,

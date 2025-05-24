@@ -1,9 +1,11 @@
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/custom_text_styles.dart';
+
 
 class CustomTextField extends StatelessWidget {
   final String title;
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           focusNode: focusNode,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
+
           validator: (value) => value == null || value.isEmpty
               ? AppLocalizations.of(context)!.theFieldCanNotBeEmpty
               : null,
@@ -65,6 +68,7 @@ class CustomTextField extends StatelessWidget {
               hintText: hintText,
               hintStyle: CustomTextStyles.style16w500Black.copyWith(
                   color: focusNode?.hasFocus == true
+
                       ? AppColors.mainColor
                       : Theme.of(context).shadowColor),
               prefixIcon: prefixIcon),
