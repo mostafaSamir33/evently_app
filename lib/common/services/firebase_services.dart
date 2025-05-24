@@ -153,4 +153,7 @@ class FirebaseServices {
     DocumentSnapshot<UserModel> document = await usersCollection.doc(uid).get();
     return document.data();
   }
+
+
+
 }
