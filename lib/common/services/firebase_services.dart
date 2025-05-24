@@ -107,6 +107,7 @@ class FirebaseServices {
         );
   }
 
+
 //firebase authentication
   static Future<UserModel> registerUser(
       {required String email,
@@ -152,4 +153,7 @@ class FirebaseServices {
     DocumentSnapshot<UserModel> document = await usersCollection.doc(uid).get();
     return document.data();
   }
+
+
+
 }
