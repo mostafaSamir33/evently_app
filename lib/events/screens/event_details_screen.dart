@@ -5,7 +5,10 @@ import 'package:evently/events/screens/edit_event_screen.dart';
 import 'package:evently/home/screens/home_screen.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
+import 'package:evently/providers/create_event_screen_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -23,11 +26,24 @@ class EventDetailsScreen extends StatefulWidget {
 
 class _EventDetailsScreenState extends State<EventDetailsScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+
     EventDataModel eventDataModel =
         ModalRoute.of(context)!.settings.arguments as EventDataModel;
+
+    CreateEventScreenProvider provider =
+        Provider.of<CreateEventScreenProvider>(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.goToEventLocation(
+          LatLng(eventDataModel.latitude, eventDataModel.longitude),
+          eventDataModel.title);
+
+      provider.convertLatLngToAddress(
+          LatLng(eventDataModel.latitude, eventDataModel.longitude));
+    });
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -56,7 +72,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   Navigator.of(context).pushNamed(HomeScreen.routeName);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
-                      AppLocalizations.of(context)!.theEventIsDeletedSuccessfully,
+                      AppLocalizations.of(context)!
+                          .theEventIsDeletedSuccessfully,
                       style: CustomTextStyles.style18w500White
                           .copyWith(color: Colors.black),
                     ),
@@ -79,7 +96,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       ),
       body: ListView(children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -171,7 +188,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          'cairo , Egypt', //TODO:map
+                          '${provider.state}, ${provider.country}',
                           style: CustomTextStyles.style16w500Black
                               .copyWith(color: AppColors.mainColor),
                         ),
@@ -186,11 +203,25 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   ),
                 ),
               ),
-              Container(
-                //TODO:map
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.mainColor),
-                    borderRadius: BorderRadius.circular(16)),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.42,
+                width: MediaQuery.of(context).size.width * 0.91,
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.mainColor),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: GoogleMap(
+                      initialCameraPosition: provider.cameraPosition,
+                      onMapCreated: (controller) {
+                        provider.googleMapController = controller;
+                      },
+                      mapType: MapType.normal,
+                      markers: provider.markers,
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 8),

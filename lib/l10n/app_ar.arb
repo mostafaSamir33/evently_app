@@ -73,5 +73,6 @@
 "theEventIsAddedSuccessfully":"تمت إضافة الحدث بنجاح",
 "theDateOrTimeIsMissing":"التاريخ أو الوقت مفقود",
 "theEventIsEditedSuccessfully":"تم تعديل الحدث بنجاح",
-"theEventIsDeletedSuccessfully":"تم حذف الحدث بنجاح"
+"theEventIsDeletedSuccessfully":"تم حذف الحدث بنجاح",
+"tapOnLocationToSelect":"اضغط على الموقع للتحديد"
 }

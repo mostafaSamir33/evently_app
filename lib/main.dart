@@ -6,12 +6,16 @@ import 'package:evently/common/app_prefs.dart';
 import 'package:evently/common/app_themes.dart';
 import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/events/screens/edit_event_screen.dart';
+import 'package:evently/events/screens/pick_location_screen.dart';
 import 'package:evently/home/screens/home_screen.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/models/event_data_model.dart';
 import 'package:evently/onboarding/screens/onboarding_screen_1.dart';
 import 'package:evently/onboarding/screens/onboarding_screen_2.dart';
+import 'package:evently/providers/create_event_screen_provider.dart';
 import 'package:evently/providers/localization_provider.dart';
+import 'package:evently/providers/map_tab_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
 import 'package:evently/providers/user_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +25,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'events/screens/event_details_screen.dart';
+import 'events/screens/pick_location_screen_for_edit_event.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -36,6 +41,8 @@ void main() async {
         create: (BuildContext context) => UserAuthProvider()),
     ChangeNotifierProvider<LocalizationProvider>(
         create: (BuildContext context) => LocalizationProvider()),
+    ChangeNotifierProvider<CreateEventScreenProvider>(
+        create: (BuildContext context) => CreateEventScreenProvider()),
   ], child: const MyApp()));
 }
 
@@ -71,6 +78,25 @@ class MyApp extends StatelessWidget {
         OnboardingScreen2.routeName: (_) => OnboardingScreen2(),
         EventDetailsScreen.routeName: (_) => EventDetailsScreen(),
         EditEventScreen.routeName: (_) => EditEventScreen(),
+        PickLocationScreen.routeName: (context) {
+          CreateEventScreenProvider provider = ModalRoute.of(context)!
+              .settings
+              .arguments as CreateEventScreenProvider;
+          return PickLocationScreen(
+            provider: provider,
+          );
+        },
+        PickLocationScreenForEditEvent.routeName: (context) {
+          Map arguments = ModalRoute.of(context)!
+              .settings
+              .arguments as Map;
+          CreateEventScreenProvider provider=arguments['provider'];
+          EventDataModel eventDataModel=arguments['eventDataModel'];
+          return PickLocationScreenForEditEvent(
+            provider: provider,
+            eventDataModel: eventDataModel,
+          );
+        },
       },
       initialRoute:
           AppPrefs.onboardingGetBool(AppConstants.onboardingKey) == null

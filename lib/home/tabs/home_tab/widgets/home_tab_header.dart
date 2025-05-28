@@ -1,12 +1,17 @@
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:evently/common/app_constants.dart';
+import 'package:evently/common/app_prefs.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_slider_model.dart';
 import 'package:evently/providers/home_tab_provider.dart';
 import 'package:evently/providers/localization_provider.dart';
+import 'package:evently/providers/map_tab_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
 import 'package:evently/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../common/widgets/categories_slider.dart';
 
 class HomeTabHeader extends StatefulWidget {
@@ -19,6 +24,9 @@ class HomeTabHeader extends StatefulWidget {
 class _HomeTabHeaderState extends State<HomeTabHeader> {
   @override
   Widget build(BuildContext context) {
+    MapTapProvider provider = Provider.of<MapTapProvider>(context);
+    provider.convertUserLatLngToAddress(userLocation());
+
     CategoryValues? selectedId =
         context.watch<HomeTabProvider>().selectedCategory;
     return Container(
@@ -114,7 +122,7 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, left: 16,right: 16),
+                padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
                 child: Row(
                   children: [
                     Icon(
@@ -122,8 +130,7 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                       color: Theme.of(context).splashColor,
                     ),
                     Text(
-                      'Cairo , Egypt',
-                      //TODO:localization //TODO:edit to user location
+                      '${provider.userState}, ${provider.userCountry}',
                       style: Theme.of(context)
                           .textTheme
                           .labelSmall!
@@ -147,5 +154,16 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
         ),
       ),
     );
+  }
+
+  LatLng userLocation() {
+    double userLocationLatitude = AppPrefs.userLocationLatitudeGetDouble(
+            AppConstants.userLocationLatitudeKey) ??
+        0;
+    double userLocationLongitude = AppPrefs.userLocationLongitudeGetDouble(
+            AppConstants.userLocationLongitudeKey) ??
+        0;
+    LatLng latLng = LatLng(userLocationLatitude, userLocationLongitude);
+    return latLng;
   }
 }
