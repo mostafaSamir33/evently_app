@@ -90,6 +90,8 @@ class EventCard extends StatelessWidget {
                           child: Text(
                             eventDataModel.title,
                             style: Theme.of(context).textTheme.titleSmall,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           )),
                       FavButton(eventDataModel: eventDataModel)
                     ],

@@ -73,5 +73,6 @@
 "theEventIsAddedSuccessfully":"The Event IS Added Successfully",
 "theDateOrTimeIsMissing":"The Date or Time is missing",
 "theEventIsEditedSuccessfully":"The Event Is Edited Successfully",
-"theEventIsDeletedSuccessfully":"The Event Is Deleted Successfully"
+"theEventIsDeletedSuccessfully":"The Event Is Deleted Successfully",
+"tapOnLocationToSelect":"Tap on Location To Select"
 }

@@ -3,11 +3,13 @@ import 'package:evently/common/custom_text_styles.dart';
 import 'package:evently/common/services/firebase_services.dart';
 import 'package:evently/common/widgets/categories_slider.dart';
 import 'package:evently/common/widgets/custom_main_button.dart';
+import 'package:evently/events/screens/pick_location_screen_for_edit_event.dart';
 import 'package:evently/events/widgets/custom_text_field.dart';
 import 'package:evently/home/screens/home_screen.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
+import 'package:evently/providers/create_event_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +62,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
     double height = MediaQuery.of(context).size.height;
     EventDataModel eventDataModel =
         ModalRoute.of(context)?.settings.arguments as EventDataModel;
+
+    CreateEventScreenProvider provider =
+        Provider.of<CreateEventScreenProvider>(context);
+
     if (!isDataInitialized) {
       titleController = TextEditingController(text: eventDataModel.title);
       descriptionController =
@@ -192,7 +198,14 @@ class _EditEventScreenState extends State<EditEventScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        PickLocationScreenForEditEvent.routeName,
+                        arguments: {
+                          'provider': provider,
+                          'eventDataModel': eventDataModel
+                        });
+                  },
                   child: Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -214,7 +227,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                           width: 8,
                         ),
                         Text(
-                          'cairo , Egypt',
+                          '${provider.state}, ${provider.country}', //TODO:map
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -254,15 +267,20 @@ class _EditEventScreenState extends State<EditEventScreen> {
                                       minute: selectedTime!.minute);
                                   EventDataModel editedEventDataModel =
                                       EventDataModel(
-                                          title: titleController?.text.trim() ??
-                                              '',
-                                          description: descriptionController
-                                                  ?.text
-                                                  .trim() ??
-                                              '',
-                                          dateTime: selectedDate!,
-                                          categoryValues:
-                                              eventDataModel.categoryValues);
+                                    title: titleController?.text.trim() ?? '',
+                                    description:
+                                        descriptionController?.text.trim() ??
+                                            '',
+                                    dateTime: selectedDate!,
+                                    categoryValues:
+                                        eventDataModel.categoryValues,
+                                    latitude: provider.eventLocation
+                                            ?.latitude ??
+                                        0,
+                                    longitude:provider.eventLocation
+                                            ?.longitude ??
+                                        0,
+                                  );
                                   FirebaseServices.editEvent(
                                       editedEventDataModel);
                                   ScaffoldMessenger.of(context)

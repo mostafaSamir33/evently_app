@@ -1,6 +1,7 @@
 import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/home/tabs/home_tab/home_tab.dart';
 import 'package:evently/home/tabs/love_tab/love_tab.dart';
+import 'package:evently/home/tabs/map_tab/map_tab.dart';
 import 'package:evently/home/tabs/profile_tab/profile_tab.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_auth_provider.dart';
@@ -8,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/map_tab_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/homeScreen';
@@ -19,7 +22,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> tabs = [HomeTab(), Placeholder(), LoveTab(), ProfileTab()];
+  List<Widget> tabs = [
+    HomeTab(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MapTapProvider(),
+        )
+      ],
+      child: MapTab(),
+    ),
+    LoveTab(),
+    ProfileTab()
+  ];
   int index = 0;
 
   @override
@@ -34,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[index],
+      body: IndexedStack(index: index, children: tabs),
       floatingActionButton: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
@@ -66,6 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
           type: BottomNavigationBarType.fixed,
           onTap: (value) {
             index = value;
+            // if (index == 1) {
+            //   context.read<MapTapProvider>().getLocation();
+            // }
             setState(() {});
           },
           currentIndex: index,
