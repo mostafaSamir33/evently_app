@@ -85,7 +85,7 @@ enum CategoryValues {
             : AppImages.bookClubImageLight;
     }
   }
-  
+
   String getName(isEnglish){
     if(isEnglish){
       return toTitle();
