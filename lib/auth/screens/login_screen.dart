@@ -4,12 +4,14 @@ import 'package:evently/auth/widgets/auth_text_field.dart';
 import 'package:evently/common/app_assets.dart';
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
+import 'package:evently/common/services/firebase_services.dart';
 import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/common/widgets/custom_main_outlined_button.dart';
 import 'package:evently/common/widgets/localization_switch.dart';
 import 'package:evently/home/screens/home_screen.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_auth_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -123,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     .read<UserAuthProvider>()
                                     .userLogin(
                                         email: emailController!.text.trim(),
-                                        password: passwordController!.text)
+                                        password: passwordController!.text,
+                                        context: context)
                                     .then(
                                   (value) {
                                     if (value == null) {
@@ -208,7 +211,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 24),
                     child: CustomMainOutlinedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          final user =
+                              await FirebaseServices.signInWithGoogle();
+                          if (user != null) {
+                            Navigator.of(context)
+                                .pushReplacementNamed(HomeScreen.routeName);
+                          }
+                        } on FirebaseAuthException catch (error) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  error.message ?? 'Something went wrong')));
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(e.toString())));
+                        }
+                      },
                       buttonTitle:
                           AppLocalizations.of(context)!.loginWithGoogle,
                       icon: SvgPicture.asset(AppImages.googleIcon),

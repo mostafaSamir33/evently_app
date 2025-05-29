@@ -1,4 +1,5 @@
 import 'package:evently/common/services/firebase_services.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +9,9 @@ class UserAuthProvider extends ChangeNotifier {
   bool loading = false;
 
   Future<String?> userLogin(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
     loading = true;
     notifyListeners();
     try {
@@ -19,7 +22,7 @@ class UserAuthProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       loading = false;
       notifyListeners();
-      String errorMessage = getMessageFromErrorCode(e);
+      String errorMessage = getMessageFromErrorCode(e, context);
       return errorMessage;
     } on FirebaseException catch (e) {
       loading = false;
@@ -36,7 +39,8 @@ class UserAuthProvider extends ChangeNotifier {
   Future<String?> userSignup(
       {required String email,
       required String password,
-      required String name}) async {
+      required String name,
+      required BuildContext context}) async {
     loading = true;
     notifyListeners();
     try {
@@ -45,7 +49,7 @@ class UserAuthProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       loading = false;
       notifyListeners();
-      String errorMessage = getMessageFromErrorCode(e);
+      String errorMessage = getMessageFromErrorCode(e, context);
       return errorMessage;
     } on FirebaseException catch (e) {
       loading = false;
@@ -65,32 +69,40 @@ class UserAuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String getMessageFromErrorCode(FirebaseAuthException e) {
+  String getMessageFromErrorCode(
+      FirebaseAuthException e, BuildContext context) {
     switch (e.code) {
       case "ERROR_EMAIL_ALREADY_IN_USE":
       case "account-exists-with-different-credential":
       case "email-already-in-use":
-        return "Email already used. Go to login page."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .emailAlreadyUsedGoToLoginPage;
       case "ERROR_WRONG_PASSWORD":
       case "wrong-password":
-        return "Wrong email/password combination."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .wrongEmailPasswordCombination;
       case "ERROR_USER_NOT_FOUND":
       case "user-not-found":
-        return "No user found with this email."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .noUserFoundWithThisEmail;
       case "ERROR_USER_DISABLED":
       case "user-disabled":
-        return "User disabled."; //TODO:localization
+        return AppLocalizations.of(context)!.userDisabled;
       case "ERROR_TOO_MANY_REQUESTS":
       case "operation-not-allowed":
-        return "Too many requests to log into this account."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .tooManyRequestsToLogIntoThisAccount;
       case "ERROR_OPERATION_NOT_ALLOWED":
       case "operation-not-allowed":
-        return "Server error, please try again later."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .serverErrorPleaseTryAgainLater;
       case "ERROR_INVALID_EMAIL":
       case "invalid-email":
-        return "Email address is invalid."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .emailAddressIsInvalid;
       default:
-        return "Login failed. Please try again."; //TODO:localization
+        return AppLocalizations.of(context)!
+            .loginFailedPleaseTryAgain;
     }
   }
 }

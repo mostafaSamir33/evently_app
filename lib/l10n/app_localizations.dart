@@ -499,6 +499,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The Event Is Deleted Successfully'**
   String get theEventIsDeletedSuccessfully;
+
+  /// No description provided for @emailAlreadyUsedGoToLoginPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already used. Go to login page.'**
+  String get emailAlreadyUsedGoToLoginPage;
+
+  /// No description provided for @wrongEmailPasswordCombination.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong email/password combination.'**
+  String get wrongEmailPasswordCombination;
+
+  /// No description provided for @noUserFoundWithThisEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found with this email.'**
+  String get noUserFoundWithThisEmail;
+
+  /// No description provided for @userDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'User disabled.'**
+  String get userDisabled;
+
+  /// No description provided for @tooManyRequestsToLogIntoThisAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests to log into this account.'**
+  String get tooManyRequestsToLogIntoThisAccount;
+
+  /// No description provided for @serverErrorPleaseTryAgainLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Server error, please try again later.'**
+  String get serverErrorPleaseTryAgainLater;
+
+  /// No description provided for @emailAddressIsInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address is invalid.'**
+  String get emailAddressIsInvalid;
+
+  /// No description provided for @loginFailedPleaseTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed. Please try again.'**
+  String get loginFailedPleaseTryAgain;
 }
 
 class _AppLocalizationsDelegate
