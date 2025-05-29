@@ -3,8 +3,11 @@ import 'package:evently/models/category_slider_model.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:evently/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseServices {
+  // static User? user = FirebaseAuth.instance.currentUser;
+
   //firebase database
   static CollectionReference<EventDataModel> getEventsCollection() {
     CollectionReference<EventDataModel> eventsCollection = getUsersCollection()
@@ -107,7 +110,6 @@ class FirebaseServices {
         );
   }
 
-
 //firebase authentication
   static Future<UserModel> registerUser(
       {required String email,
@@ -154,6 +156,22 @@ class FirebaseServices {
     return document.data();
   }
 
+//login with google
+  static signInWithGoogle() async {
+    GoogleSignInAccount? googleAccount = await GoogleSignIn().signIn();
+    if (googleAccount == null) return;
+    GoogleSignInAuthentication googleAuthentication =
+        await googleAccount.authentication;
+    OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuthentication.accessToken,
+        idToken: googleAuthentication.idToken);
+    final UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    return userCredential.user;
+  }
 
-
+  static Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+  }
 }

@@ -216,4 +216,32 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get theEventIsDeletedSuccessfully =>
       'The Event Is Deleted Successfully';
+
+  @override
+  String get emailAlreadyUsedGoToLoginPage =>
+      'Email already used. Go to login page.';
+
+  @override
+  String get wrongEmailPasswordCombination =>
+      'Wrong email/password combination.';
+
+  @override
+  String get noUserFoundWithThisEmail => 'No user found with this email.';
+
+  @override
+  String get userDisabled => 'User disabled.';
+
+  @override
+  String get tooManyRequestsToLogIntoThisAccount =>
+      'Too many requests to log into this account.';
+
+  @override
+  String get serverErrorPleaseTryAgainLater =>
+      'Server error, please try again later.';
+
+  @override
+  String get emailAddressIsInvalid => 'Email address is invalid.';
+
+  @override
+  String get loginFailedPleaseTryAgain => 'Login failed. Please try again.';
 }

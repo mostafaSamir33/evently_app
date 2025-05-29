@@ -74,5 +74,14 @@
 "theDateOrTimeIsMissing":"The Date or Time is missing",
 "theEventIsEditedSuccessfully":"The Event Is Edited Successfully",
 "theEventIsDeletedSuccessfully":"The Event Is Deleted Successfully",
-"tapOnLocationToSelect":"Tap on Location To Select"
+"tapOnLocationToSelect":"Tap on Location To Select",
+
+"emailAlreadyUsedGoToLoginPage":"Email already used. Go to login page.",
+"wrongEmailPasswordCombination":"Wrong email/password combination.",
+"noUserFoundWithThisEmail":"No user found with this email.",
+"userDisabled":"User disabled.",
+"tooManyRequestsToLogIntoThisAccount":"Too many requests to log into this account.",
+"serverErrorPleaseTryAgainLater":"Server error, please try again later.",
+"emailAddressIsInvalid":"Email address is invalid.",
+"loginFailedPleaseTryAgain":"Login failed. Please try again."
 }

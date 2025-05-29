@@ -74,5 +74,14 @@
 "theDateOrTimeIsMissing":"التاريخ أو الوقت مفقود",
 "theEventIsEditedSuccessfully":"تم تعديل الحدث بنجاح",
 "theEventIsDeletedSuccessfully":"تم حذف الحدث بنجاح",
-"tapOnLocationToSelect":"اضغط على الموقع للتحديد"
+"tapOnLocationToSelect":"اضغط على الموقع للتحديد",
+
+"emailAlreadyUsedGoToLoginPage":"تم استخدام البريد الإلكتروني. انتقل إلى صفحة تسجيل الدخول.",
+"wrongEmailPasswordCombination":"مزيج خاطئ من البريد الإلكتروني وكلمة المرور.",
+"noUserFoundWithThisEmail":"لم يتم العثور على مستخدم بهذا البريد الإلكتروني.",
+"userDisabled":"تم تعطيل المستخدم.",
+"tooManyRequestsToLogIntoThisAccount":"هناك الكثير من الطلبات لتسجيل الدخول إلى هذا الحساب.",
+"serverErrorPleaseTryAgainLater":"خطأ في الخادم، يرجى المحاولة مرة أخرى لاحقًا.",
+"emailAddressIsInvalid":"عنوان البريد الإلكتروني غير صالح.",
+"loginFailedPleaseTryAgain":"فشل تسجيل الدخول. يُرجى المحاولة مرة أخرى."
 }

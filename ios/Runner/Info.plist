@@ -2,6 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+	    <key>CLIENT_ID</key>
+    	<string>1002735867588-lrfavpiu47ef1tpumqhbvb00jo7kh80r.apps.googleusercontent.com</string>
+    	<key>API_KEY</key>
+        <string>AIzaSyBOZ-VrnrCB5gpRQ9GnC9_48xA3-RZfzBQ</string>
+        <key>STORAGE_BUCKET</key>
+        <string>evently-6caf0.firebasestorage.app</string>
+
+                    <key>CFBundleURLTypes</key>
+                    <array>
+                        <dict>
+                            <key>CFBundleTypeRole</key>
+                            <string>Editor</string>
+                            <key>CFBundleURLSchemes</key>
+                            <array>
+                                <!-- TODO Replace this value: -->
+                                <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+                                <string>com.googleusercontent.apps.1002735867588-lrfavpiu47ef1tpumqhbvb00jo7kh80r</string>
+                            </array>
+                        </dict>
+                    </array>
+
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

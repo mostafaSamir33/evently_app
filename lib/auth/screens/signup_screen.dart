@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
 import '../../common/app_assets.dart';
 import '../../common/app_colors.dart';
 import '../../common/custom_text_styles.dart';
@@ -153,7 +154,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                   .userSignup(
                                       email: emailController!.text.trim(),
                                       password: passwordController!.text,
-                                      name: nameController!.text)
+                                      name: nameController!.text,
+                                      context: context)
                                   .then(
                                 (value) {
                                   if (value == null) {

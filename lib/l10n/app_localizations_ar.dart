@@ -215,4 +215,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get theEventIsDeletedSuccessfully => 'تم حذف الحدث بنجاح';
+
+  @override
+  String get emailAlreadyUsedGoToLoginPage =>
+      'تم استخدام البريد الإلكتروني. انتقل إلى صفحة تسجيل الدخول.';
+
+  @override
+  String get wrongEmailPasswordCombination =>
+      'مزيج خاطئ من البريد الإلكتروني وكلمة المرور.';
+
+  @override
+  String get noUserFoundWithThisEmail =>
+      'لم يتم العثور على مستخدم بهذا البريد الإلكتروني.';
+
+  @override
+  String get userDisabled => 'تم تعطيل المستخدم.';
+
+  @override
+  String get tooManyRequestsToLogIntoThisAccount =>
+      'هناك الكثير من الطلبات لتسجيل الدخول إلى هذا الحساب.';
+
+  @override
+  String get serverErrorPleaseTryAgainLater =>
+      'خطأ في الخادم، يرجى المحاولة مرة أخرى لاحقًا.';
+
+  @override
+  String get emailAddressIsInvalid => 'عنوان البريد الإلكتروني غير صالح.';
+
+  @override
+  String get loginFailedPleaseTryAgain =>
+      'فشل تسجيل الدخول. يُرجى المحاولة مرة أخرى.';
 }

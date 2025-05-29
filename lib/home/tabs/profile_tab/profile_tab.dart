@@ -1,20 +1,25 @@
 import 'package:evently/auth/screens/login_screen.dart';
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
+import 'package:evently/common/services/firebase_services.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/custom_drop_down_button.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/custom_drop_down_menu.dart';
 import 'package:evently/home/tabs/profile_tab/widgets/profile_tab_header.dart';
 import 'package:evently/l10n/app_localizations.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/localization_provider.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
 
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -60,8 +65,11 @@ class ProfileTab extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
           child: FilledButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+              await FirebaseServices.signOut();
+              if (mounted) {
+                Navigator.of(context)
+                    .pushReplacementNamed(LoginScreen.routeName);
+              }
             },
             style: FilledButton.styleFrom(
                 foregroundColor: Colors.white,
