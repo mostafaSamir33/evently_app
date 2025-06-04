@@ -270,18 +270,21 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                           minute: selectedTime!.minute);
                                       EventDataModel eventDataModel =
                                           EventDataModel(
-                                        title: titleController.text.trim(),
-                                        description:
-                                            descriptionController.text.trim(),
-                                        dateTime: selectedDate!,
-                                        categoryValues: selectedId,
-                                        latitude:
-                                            provider.eventLocation?.latitude ??
-                                                0,
-                                        longitude:
-                                            provider.eventLocation?.longitude ??
-                                                0,
-                                      );
+                                              title: titleController.text
+                                                  .trim(),
+                                              description: descriptionController
+                                                  .text
+                                                  .trim(),
+                                              dateTime: selectedDate!,
+                                              categoryValues: selectedId,
+                                              latitude: provider.eventLocation
+                                                      ?.latitude ??
+                                                  0,
+                                              longitude: provider.eventLocation
+                                                      ?.longitude ??
+                                                  0,
+                                              state: provider.state ?? '',
+                                              country: provider.country ?? '');
                                       await FirebaseServices.addNewEvent(
                                           eventDataModel);
                                       ScaffoldMessenger.of(context)

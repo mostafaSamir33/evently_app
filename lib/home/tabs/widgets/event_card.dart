@@ -33,6 +33,7 @@ class EventCard extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Stack(
+            key: UniqueKey(),
             children: [
               Image.asset(
                 eventDataModel.categoryValues.getImage(
@@ -69,7 +70,6 @@ class EventCard extends StatelessWidget {
                       ],
                     ),
                   ),
-
                 ),
               ),
               Positioned(
@@ -101,7 +101,6 @@ class EventCard extends StatelessWidget {
               )
             ],
           ),
-
         ),
       ),
     );

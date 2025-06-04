@@ -18,14 +18,29 @@ class MapTab extends StatefulWidget {
 }
 
 class _MapTabState extends State<MapTab> {
+  List<EventDataModel> _events = [];
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseServices.getAllEventsStream().listen((eventList) {
+      if (mounted) {
+        setState(() {
+          _events = eventList;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     MapTapProvider provider = Provider.of<MapTapProvider>(context);
     PermissionStatus? permissionStatus = provider.permissionStatus;
-    return permissionStatus == PermissionStatus.granted ||
-            permissionStatus == PermissionStatus.grantedLimited
-        ? Scaffold(
-            body: Stack(
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
                 Column(
@@ -42,37 +57,27 @@ class _MapTabState extends State<MapTab> {
                     ),
                   ],
                 ),
-                StreamBuilder(
-                  stream: FirebaseServices.getAllEventsStream(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                _events.isEmpty
+                    ? Center(
                         child: CircularProgressIndicator(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else {
-                      List<EventDataModel> data = snapshot.data ?? [];
-                      return SizedBox(
+                      )
+                    : SizedBox(
                         height: MediaQuery.of(context).size.height * 0.19,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(
                               vertical: 32, horizontal: 16),
-                          itemCount: data.length,
+                          itemCount: _events.length,
                           itemBuilder: (context, index) {
-                            List<EventDataModel> data = snapshot.data ?? [];
                             return InkWell(
                               onTap: () {
                                 provider.goToEventLocation(
-                                    LatLng(data[index].latitude,
-                                        data[index].longitude),
-                                    data[index].title);
+                                    LatLng(_events[index].latitude,
+                                        _events[index].longitude),
+                                    _events[index].title);
                               },
                               child: EventCardMapTab(
-                                eventDataModel: data[index],
+                                eventDataModel: _events[index],
                                 provider: provider,
                               ),
                             );
@@ -80,52 +85,59 @@ class _MapTabState extends State<MapTab> {
                           separatorBuilder: (context, index) =>
                               SizedBox(width: 10),
                         ),
-                      );
-                    }
-                  },
-                ),
+                      ),
               ],
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                provider.getLocation();
-              },
-              backgroundColor: AppColors.mainColor,
-              child: Icon(
-                Icons.gps_fixed,
-                color: Theme.of(context).scaffoldBackgroundColor,
-              ),
-            ),
-          )
-        : Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${context.watch<MapTapProvider>().locationMessage}\nclick on the button\nthen choose Application permissions\nthen choose Geographical location\nthen give the location permission',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    await AppSettings.openAppSettings();
-                  },
-                  child: Text(
-                    'open app settings',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: Theme.of(context).splashColor),
+          ),
+          permissionStatus == PermissionStatus.deniedForever ||
+                  permissionStatus == PermissionStatus.denied
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${context.watch<MapTapProvider>().locationMessage}\nclick on the button\nthen choose Application permissions\nthen choose Geographical location\nthen give the location permission',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            await AppSettings.openAppSettings();
+                          },
+                          child: Text(
+                            'open app settings',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(color: Theme.of(context).splashColor),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.mainColor),
+                        )
+                      ],
+                    ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mainColor),
                 )
-              ],
-            ),
-          );
+              : SizedBox.shrink()
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        heroTag: Text("btn2"),
+        onPressed: () {
+          provider.getLocation();
+        },
+        backgroundColor: AppColors.mainColor,
+        child: Icon(
+          Icons.gps_fixed,
+          color: Theme.of(context).scaffoldBackgroundColor,
+        ),
+      ),
+    );
   }
 }

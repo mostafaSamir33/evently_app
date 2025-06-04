@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'events/screens/event_details_screen.dart';
 import 'events/screens/pick_location_screen_for_edit_event.dart';
@@ -42,14 +41,11 @@ void main() async {
   final themeProvider = ThemeProvider();
   await themeProvider.themeGetBool();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<ThemeProvider>.value(
-        value: themeProvider),
+    ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
     ChangeNotifierProvider<UserAuthProvider>(
         create: (BuildContext context) => UserAuthProvider()),
     ChangeNotifierProvider<LocalizationProvider>.value(
         value: localizationProvider),
-    ChangeNotifierProvider<CreateEventScreenProvider>(
-        create: (BuildContext context) => CreateEventScreenProvider()),
   ], child: const MyApp()));
 }
 
@@ -82,11 +78,20 @@ class MyApp extends StatelessWidget {
         SignupScreen.routeName: (_) => SignupScreen(),
         ForgetPasswordScreen.routeName: (_) => ForgetPasswordScreen(),
         HomeScreen.routeName: (_) => HomeScreen(),
-        CreateEventScreen.routeName: (_) => CreateEventScreen(),
+        CreateEventScreen.routeName: (_) =>
+            ChangeNotifierProvider<CreateEventScreenProvider>(
+                create: (context) => CreateEventScreenProvider(),
+                child: CreateEventScreen()),
         OnboardingScreen1.routeName: (_) => OnboardingScreen1(),
         OnboardingScreen2.routeName: (_) => OnboardingScreen2(),
-        EventDetailsScreen.routeName: (_) => EventDetailsScreen(),
-        EditEventScreen.routeName: (_) => EditEventScreen(),
+        EventDetailsScreen.routeName: (_) =>
+            ChangeNotifierProvider<CreateEventScreenProvider>(
+                create: (context) => CreateEventScreenProvider(),
+                child: EventDetailsScreen()),
+        EditEventScreen.routeName: (_) =>
+            ChangeNotifierProvider<CreateEventScreenProvider>(
+                create: (context) => CreateEventScreenProvider(),
+                child: EditEventScreen()),
         PickLocationScreen.routeName: (context) {
           CreateEventScreenProvider provider = ModalRoute.of(context)!
               .settings

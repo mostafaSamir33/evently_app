@@ -6,11 +6,13 @@ import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/events/screens/pick_location_screen_for_edit_event.dart';
 import 'package:evently/events/widgets/custom_text_field.dart';
 import 'package:evently/home/screens/home_screen.dart';
+
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:evently/providers/create_event_screen_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +67,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
     CreateEventScreenProvider provider =
         Provider.of<CreateEventScreenProvider>(context);
+
+    provider.convertLatLngToAddress(LatLng(
+        provider.eventLocation?.latitude ?? eventDataModel.latitude,
+        provider.eventLocation?.longitude ?? eventDataModel.longitude));
 
     if (!isDataInitialized) {
       titleController = TextEditingController(text: eventDataModel.title);
@@ -227,7 +233,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                           width: 8,
                         ),
                         Text(
-                          '${provider.state}, ${provider.country}', //TODO:map
+                          '${provider.state}, ${provider.country}',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -274,12 +280,14 @@ class _EditEventScreenState extends State<EditEventScreen> {
                                     dateTime: selectedDate!,
                                     categoryValues:
                                         eventDataModel.categoryValues,
-                                    latitude: provider.eventLocation
-                                            ?.latitude ??
-                                        0,
-                                    longitude:provider.eventLocation
-                                            ?.longitude ??
-                                        0,
+                                    latitude:
+                                        provider.eventLocation?.latitude ?? 0,
+                                    longitude:
+                                        provider.eventLocation?.longitude ?? 0,
+                                    state:
+                                        provider.state ?? eventDataModel.state,
+                                    country: provider.country ??
+                                        eventDataModel.country,
                                   );
                                   FirebaseServices.editEvent(
                                       editedEventDataModel);

@@ -112,9 +112,11 @@ class MapTapProvider extends ChangeNotifier {
 
     markers.removeWhere((marker) => marker.markerId.value == '1');
 
+    markers.clear();//مش شغالة كويس بردو ولكن في اول run فقط //TODO:map
+
     markers.add(
       Marker(
-          markerId: MarkerId('2'),
+          markerId: MarkerId(UniqueKey().toString()),
           position: LatLng(latLng.latitude, latLng.longitude),
           infoWindow: InfoWindow(title: eventTitle)),
     );
@@ -132,8 +134,6 @@ class MapTapProvider extends ChangeNotifier {
     if (placeMarks.isNotEmpty) {
       state = placeMarks.first.administrativeArea ?? 'can not find state';
       country = placeMarks.first.country ?? 'can not find country';
-      // log('state: $state');
-      // notifyListeners();
     }
     notifyListeners();
   }
@@ -145,7 +145,6 @@ class MapTapProvider extends ChangeNotifier {
     if (placeMarks.isNotEmpty) {
       userState = placeMarks.first.administrativeArea ?? 'can not find state';
       userCountry = placeMarks.first.country ?? 'can not find country';
-      // notifyListeners();
     }
     notifyListeners();
   }

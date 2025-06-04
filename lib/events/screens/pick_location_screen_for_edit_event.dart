@@ -1,7 +1,6 @@
 import 'package:evently/models/event_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '../../common/app_colors.dart';
 import '../../common/custom_text_styles.dart';
@@ -31,7 +30,10 @@ class _PickLocationScreenForEditEventState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.provider.goToEventLocation(
           LatLng(
-              widget.eventDataModel.latitude, widget.eventDataModel.longitude),
+              widget.provider.eventLocation?.latitude ??
+                  widget.eventDataModel.latitude,
+            widget.provider.eventLocation?.longitude ??
+                widget.eventDataModel.longitude,),
           widget.eventDataModel.title);
       isMapInitialized = true;
       setState(() {});
@@ -40,9 +42,6 @@ class _PickLocationScreenForEditEventState
 
   @override
   Widget build(BuildContext context) {
-    // CreateEventScreenProvider provider =
-    //     Provider.of<CreateEventScreenProvider>(context);
-
     return Scaffold(
       body: isMapInitialized
           ? Column(
