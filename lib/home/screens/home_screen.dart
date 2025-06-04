@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           border: Border.all(color: Theme.of(context).splashColor, width: 5),
         ),
         child: FloatingActionButton(
+          heroTag: Text('btn1'),
           onPressed: () {
             Navigator.of(context).pushNamed(CreateEventScreen.routeName);
           },

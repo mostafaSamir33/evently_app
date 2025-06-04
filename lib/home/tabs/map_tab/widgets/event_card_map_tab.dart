@@ -22,8 +22,8 @@ class _EventCardMapTabState extends State<EventCardMapTab> {
   @override
   void initState() {
     super.initState();
-    // widget.provider.convertLatLngToAddress(LatLng(
-    //     widget.eventDataModel.latitude, widget.eventDataModel.longitude));
+    widget.provider.convertLatLngToAddress(LatLng(
+        widget.eventDataModel.latitude, widget.eventDataModel.longitude));
   }
 
   @override
@@ -76,8 +76,7 @@ class _EventCardMapTabState extends State<EventCardMapTab> {
                       SizedBox(
                         width: width * 0.31,
                         child: Text(
-                          // '${widget.provider.state}, ${widget.provider.country}',
-                          '${widget.eventDataModel.latitude.floor()}, ${widget.eventDataModel.longitude.floor()}',
+                          '${widget.eventDataModel.state}, ${widget.eventDataModel.country}',
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

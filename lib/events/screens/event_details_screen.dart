@@ -36,14 +36,14 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
     CreateEventScreenProvider provider =
         Provider.of<CreateEventScreenProvider>(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+
       provider.goToEventLocation(
           LatLng(eventDataModel.latitude, eventDataModel.longitude),
           eventDataModel.title);
 
       provider.convertLatLngToAddress(
           LatLng(eventDataModel.latitude, eventDataModel.longitude));
-    });
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -213,10 +213,12 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: GoogleMap(
+                      scrollGesturesEnabled: false,
+                      rotateGesturesEnabled: false,
+                      zoomControlsEnabled: false,
+                      zoomGesturesEnabled: false,
+                      mapToolbarEnabled: false,
                       initialCameraPosition: provider.cameraPosition,
-                      onMapCreated: (controller) {
-                        provider.googleMapController = controller;
-                      },
                       mapType: MapType.normal,
                       markers: provider.markers,
                     ),

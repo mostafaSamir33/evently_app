@@ -105,6 +105,13 @@ class CreateEventScreenProvider extends ChangeNotifier {
 
     markers.removeWhere((marker) => marker.markerId.value == '1');
 
+    markers.clear();
+
+    cameraPosition = CameraPosition(
+      target: LatLng(latLng.latitude, latLng.longitude),
+      zoom: 14.4746,
+    );
+
     markers.add(
       Marker(
         markerId: MarkerId('2'),
@@ -119,6 +126,8 @@ class CreateEventScreenProvider extends ChangeNotifier {
     cameraPosition = CameraPosition(target: latLng, zoom: 14.4746);
 
     markers.removeWhere((marker) => marker.markerId.value == '1');
+
+    markers.removeWhere((marker) => marker.markerId.value == '2');
 
     markers.add(
       Marker(
