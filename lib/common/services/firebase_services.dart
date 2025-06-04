@@ -102,12 +102,9 @@ class FirebaseServices {
   static Future<void> editEvent(EventDataModel eventDataModel) async {
     CollectionReference<EventDataModel> eventsCollection =
         getEventsCollection();
-    await eventsCollection.doc(eventDataModel.id).update(eventDataModel.toJson()
-        // 'title': eventDataModel.title,
-        // 'description': eventDataModel.description,
-        // 'categoryValues': eventDataModel.categoryValues,
-        // 'dateTime': eventDataModel.dateTime
-        );
+    await eventsCollection
+        .doc(eventDataModel.id)
+        .update(eventDataModel.toJson());
   }
 
 //firebase authentication

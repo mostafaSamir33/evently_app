@@ -8,7 +8,6 @@ import 'package:evently/models/event_data_model.dart';
 import 'package:evently/providers/create_event_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -37,12 +36,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     CreateEventScreenProvider provider =
         Provider.of<CreateEventScreenProvider>(context);
 
-      provider.goToEventLocation(
-          LatLng(eventDataModel.latitude, eventDataModel.longitude),
-          eventDataModel.title);
-
-      provider.convertLatLngToAddress(
-          LatLng(eventDataModel.latitude, eventDataModel.longitude));
+    provider.convertLatLngToAddress(
+        LatLng(eventDataModel.latitude, eventDataModel.longitude));
 
     return Scaffold(
       key: _scaffoldKey,
@@ -185,12 +180,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           color: Theme.of(context).scaffoldBackgroundColor,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          '${provider.state}, ${provider.country}',
-                          style: CustomTextStyles.style16w500Black
-                              .copyWith(color: AppColors.mainColor),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '${provider.state}, ${provider.country}',
+                            style: CustomTextStyles.style16w500Black
+                                .copyWith(color: AppColors.mainColor),
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -218,9 +216,19 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       zoomControlsEnabled: false,
                       zoomGesturesEnabled: false,
                       mapToolbarEnabled: false,
-                      initialCameraPosition: provider.cameraPosition,
+                      initialCameraPosition: CameraPosition(
+                          target: LatLng(eventDataModel.latitude,
+                              eventDataModel.longitude),
+                          zoom: 14.4746),
                       mapType: MapType.normal,
-                      markers: provider.markers,
+                      markers: {
+                        Marker(
+                          markerId: MarkerId('2'),
+                          position: LatLng(eventDataModel.latitude,
+                              eventDataModel.longitude),
+                          infoWindow: InfoWindow(title: eventDataModel.title),
+                        )
+                      },
                     ),
                   ),
                 ),

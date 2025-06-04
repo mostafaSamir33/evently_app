@@ -6,7 +6,6 @@ import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/events/screens/pick_location_screen_for_edit_event.dart';
 import 'package:evently/events/widgets/custom_text_field.dart';
 import 'package:evently/home/screens/home_screen.dart';
-
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
@@ -232,12 +231,15 @@ class _EditEventScreenState extends State<EditEventScreen> {
                         SizedBox(
                           width: 8,
                         ),
-                        Text(
-                          '${provider.state}, ${provider.country}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: AppColors.mainColor),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width*0.6,
+                          child: Text(
+                            '${provider.state}, ${provider.country}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(color: AppColors.mainColor),
+                          ),
                         ),
                         Spacer(),
                         Icon(
@@ -273,6 +275,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                                       minute: selectedTime!.minute);
                                   EventDataModel editedEventDataModel =
                                       EventDataModel(
+                                    id: eventDataModel.id,
                                     title: titleController?.text.trim() ?? '',
                                     description:
                                         descriptionController?.text.trim() ??
@@ -281,9 +284,11 @@ class _EditEventScreenState extends State<EditEventScreen> {
                                     categoryValues:
                                         eventDataModel.categoryValues,
                                     latitude:
-                                        provider.eventLocation?.latitude ?? 0,
+                                        provider.eventLocation?.latitude ??
+                                            eventDataModel.latitude,
                                     longitude:
-                                        provider.eventLocation?.longitude ?? 0,
+                                        provider.eventLocation?.longitude ??
+                                            eventDataModel.longitude,
                                     state:
                                         provider.state ?? eventDataModel.state,
                                     country: provider.country ??

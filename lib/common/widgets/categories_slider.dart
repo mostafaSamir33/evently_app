@@ -79,7 +79,41 @@ class CategoriesSlider extends StatelessWidget {
                               : currentCategoryModel.title ==
                                       CategoryValues.sport.name
                                   ? CategoryValues.sport.getName(isEnglish)
-                                  : CategoryValues.bookClub.getName(isEnglish),
+                                  : currentCategoryModel.title ==
+                                          CategoryValues.bookClub.name
+                                      ? CategoryValues.bookClub
+                                          .getName(isEnglish)
+                                      : currentCategoryModel.title ==
+                                              CategoryValues.meeting.name
+                                          ? CategoryValues.meeting
+                                              .getName(isEnglish)
+                                          : currentCategoryModel.title ==
+                                                  CategoryValues.gaming.name
+                                              ? CategoryValues.gaming
+                                                  .getName(isEnglish)
+                                              : currentCategoryModel.title ==
+                                                      CategoryValues.eating.name
+                                                  ? CategoryValues.eating
+                                                      .getName(isEnglish)
+                                                  : currentCategoryModel
+                                                              .title ==
+                                                          CategoryValues
+                                                              .holiday.name
+                                                      ? CategoryValues.holiday
+                                                          .getName(isEnglish)
+                                                      : currentCategoryModel
+                                                                  .title ==
+                                                              CategoryValues
+                                                                  .exhibition
+                                                                  .name
+                                                          ? CategoryValues
+                                                              .exhibition
+                                                              .getName(
+                                                                  isEnglish)
+                                                          : CategoryValues
+                                                              .workshop
+                                                              .getName(
+                                                                  isEnglish),
                       style: CustomTextStyles.style16w500Black.copyWith(
                         color: currentCategoryModel.categoryValues ==
                                     categoryValues &&
