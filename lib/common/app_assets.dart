@@ -32,6 +32,30 @@ class AppImages {
       'assets/images/home_images/birthday_image_dark.png';
   static const String bookClubImageDark =
       'assets/images/home_images/bookclub_image_dark.png';
+  static const String meetingImageLight =
+      'assets/images/home_images/meeting_image.png';
+  static const String gamingImageLight =
+      'assets/images/home_images/gaming_image.png';
+  static const String eatingImageLight =
+      'assets/images/home_images/eating_image.png';
+  static const String holidayImageLight =
+      'assets/images/home_images/holiday_image.png';
+  static const String exhibitionImageLight =
+      'assets/images/home_images/exhibition_image.png';
+  static const String workshopImageLight =
+      'assets/images/home_images/workshop_image.png';
+  static const String meetingImageDark =
+      'assets/images/home_images/meeting_image_dark.png';
+  static const String gamingImageDark =
+      'assets/images/home_images/gaming_image_dark.png';
+  static const String eatingImageDark =
+      'assets/images/home_images/eating_image_dark.png';
+  static const String holidayImageDark =
+      'assets/images/home_images/holiday_image_dark.png';
+  static const String exhibitionImageDark =
+      'assets/images/home_images/exhibition_image_dark.png';
+  static const String workshopImageDark =
+      'assets/images/home_images/workshop_image_dark.png';
 
 //
   static const String routeImage = 'assets/images/home_images/route_image.png';

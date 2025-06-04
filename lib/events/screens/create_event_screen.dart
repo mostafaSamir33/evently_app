@@ -229,7 +229,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                                     ? AppLocalizations.of(context)!
                                         .chooseEventLocation
                                     : '${provider.state}, ${provider.country}',
-                                //TODO:map
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium!
