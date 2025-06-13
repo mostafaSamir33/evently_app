@@ -112,7 +112,7 @@ class MapTapProvider extends ChangeNotifier {
 
     markers.removeWhere((marker) => marker.markerId.value == '1');
 
-    markers.clear();//مش شغالة كويس بردو ولكن في اول run فقط //TODO:map
+    markers.clear();
 
     markers.add(
       Marker(

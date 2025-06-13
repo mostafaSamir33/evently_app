@@ -4,6 +4,7 @@ import 'package:evently/auth/screens/signup_screen.dart';
 import 'package:evently/common/app_constants.dart';
 import 'package:evently/common/app_prefs.dart';
 import 'package:evently/common/app_themes.dart';
+import 'package:evently/common/services/fcm_services.dart';
 import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/events/screens/edit_event_screen.dart';
 import 'package:evently/events/screens/pick_location_screen.dart';
@@ -33,6 +34,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FCMServices.init();
   await AppPrefs.init();
   //caching localization(shared preference)
   final localizationProvider = LocalizationProvider();
@@ -42,8 +44,6 @@ void main() async {
   await themeProvider.themeGetBool();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
-    ChangeNotifierProvider<UserAuthProvider>(
-        create: (BuildContext context) => UserAuthProvider()),
     ChangeNotifierProvider<LocalizationProvider>.value(
         value: localizationProvider),
   ], child: const MyApp()));
@@ -74,10 +74,13 @@ class MyApp extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: context.watch<ThemeProvider>().themeMode,
       routes: {
-        LoginScreen.routeName: (_) => LoginScreen(),
-        SignupScreen.routeName: (_) => SignupScreen(),
+        LoginScreen.routeName: (_) => ChangeNotifierProvider(
+            create: (context) => UserAuthProvider(), child: LoginScreen()),
+        SignupScreen.routeName: (_) => ChangeNotifierProvider(
+            create: (context) => UserAuthProvider(), child: SignupScreen()),
         ForgetPasswordScreen.routeName: (_) => ForgetPasswordScreen(),
-        HomeScreen.routeName: (_) => HomeScreen(),
+        HomeScreen.routeName: (_) => ChangeNotifierProvider(
+            create: (context) => UserAuthProvider(), child: HomeScreen()),
         CreateEventScreen.routeName: (_) =>
             ChangeNotifierProvider<CreateEventScreenProvider>(
                 create: (context) => CreateEventScreenProvider(),

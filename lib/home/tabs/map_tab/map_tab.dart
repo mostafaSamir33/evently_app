@@ -57,11 +57,7 @@ class _MapTabState extends State<MapTab> {
                     ),
                   ],
                 ),
-                _events.isEmpty
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : SizedBox(
+                SizedBox(
                         height: MediaQuery.of(context).size.height * 0.19,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,

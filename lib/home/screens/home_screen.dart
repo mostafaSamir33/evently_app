@@ -82,9 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
           type: BottomNavigationBarType.fixed,
           onTap: (value) {
             index = value;
-            // if (index == 1) {
-            //   context.read<MapTapProvider>().getLocation();
-            // }
             setState(() {});
           },
           currentIndex: index,
