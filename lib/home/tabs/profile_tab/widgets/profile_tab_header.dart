@@ -1,8 +1,10 @@
 import 'package:evently/common/app_assets.dart';
 import 'package:evently/common/app_colors.dart';
 import 'package:evently/common/custom_text_styles.dart';
+import 'package:evently/providers/user_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTabHeader extends StatelessWidget {
   const ProfileTabHeader({super.key});
@@ -45,7 +47,9 @@ class ProfileTabHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    FirebaseAuth.instance.currentUser?.displayName ?? 'User',
+                    context.read<UserAuthProvider>().userModel?.name ??
+                        FirebaseAuth.instance.currentUser?.displayName ??
+                        'User',
                     style: CustomTextStyles.style18w700Black.copyWith(
                         color: Theme.of(context).splashColor, fontSize: 24),
                   ),

@@ -7,6 +7,7 @@ import 'package:evently/providers/home_tab_provider.dart';
 import 'package:evently/providers/localization_provider.dart';
 import 'package:evently/providers/map_tab_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
+import 'package:evently/providers/user_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -56,7 +57,8 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                               .copyWith(color: Theme.of(context).splashColor),
                         ),
                         Text(
-                          FirebaseAuth.instance.currentUser?.displayName ??
+                          context.read<UserAuthProvider>().userModel?.name ??
+                              FirebaseAuth.instance.currentUser?.displayName ??
                               'User',
                           style: Theme.of(context)
                               .textTheme
