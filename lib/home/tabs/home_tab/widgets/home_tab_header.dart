@@ -58,7 +58,6 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
                         ),
                         Text(
                           context.read<UserAuthProvider>().userModel?.name ??
-                              FirebaseAuth.instance.currentUser?.displayName ??
                               'User',
                           style: Theme.of(context)
                               .textTheme
@@ -161,10 +160,10 @@ class _HomeTabHeaderState extends State<HomeTabHeader> {
   LatLng userLocation() {
     double userLocationLatitude = AppPrefs.userLocationLatitudeGetDouble(
             AppConstants.userLocationLatitudeKey) ??
-        0;
+        37.43296265331129;
     double userLocationLongitude = AppPrefs.userLocationLongitudeGetDouble(
             AppConstants.userLocationLongitudeKey) ??
-        0;
+        -122.08832357078792;
     LatLng latLng = LatLng(userLocationLatitude, userLocationLongitude);
     return latLng;
   }

@@ -24,11 +24,13 @@ class LocalizationProvider extends ChangeNotifier {
   //caching localization(shared preference)
   Future<void> localizationGetBool() async {
     bool? localizationGetBool =
-       AppPrefs.localizationGetBool(AppConstants.localizationKey);
+        AppPrefs.localizationGetBool(AppConstants.localizationKey);
     if (localizationGetBool == true) {
       appLocalization = 'en';
-    } else {
+    } else if (localizationGetBool == false) {
       appLocalization = 'ar';
+    } else {
+      appLocalization = 'en';
     }
   }
 }

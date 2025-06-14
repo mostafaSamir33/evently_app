@@ -20,10 +20,12 @@ class ThemeProvider extends ChangeNotifier {
 //caching theme(shared preference)
   Future<void> themeGetBool() async {
     bool? themeGetBool = AppPrefs.themeGetBool(AppConstants.themeKey);
-    if(themeGetBool==true){
-      themeMode=ThemeMode.light;
-    }else{
-      themeMode=ThemeMode.dark;
+    if (themeGetBool == true) {
+      themeMode = ThemeMode.light;
+    } else if (themeGetBool == false) {
+      themeMode = ThemeMode.dark;
+    } else {
+      themeMode = ThemeMode.light;
     }
   }
 }
