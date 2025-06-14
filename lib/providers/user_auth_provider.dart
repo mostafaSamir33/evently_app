@@ -75,16 +75,13 @@ class UserAuthProvider extends ChangeNotifier {
       case "ERROR_EMAIL_ALREADY_IN_USE":
       case "account-exists-with-different-credential":
       case "email-already-in-use":
-        return AppLocalizations.of(context)!
-            .emailAlreadyUsedGoToLoginPage;
+        return AppLocalizations.of(context)!.emailAlreadyUsedGoToLoginPage;
       case "ERROR_WRONG_PASSWORD":
       case "wrong-password":
-        return AppLocalizations.of(context)!
-            .wrongEmailPasswordCombination;
+        return AppLocalizations.of(context)!.wrongEmailPasswordCombination;
       case "ERROR_USER_NOT_FOUND":
       case "user-not-found":
-        return AppLocalizations.of(context)!
-            .noUserFoundWithThisEmail;
+        return AppLocalizations.of(context)!.noUserFoundWithThisEmail;
       case "ERROR_USER_DISABLED":
       case "user-disabled":
         return AppLocalizations.of(context)!.userDisabled;
@@ -94,15 +91,12 @@ class UserAuthProvider extends ChangeNotifier {
             .tooManyRequestsToLogIntoThisAccount;
       case "ERROR_OPERATION_NOT_ALLOWED":
       case "operation-not-allowed":
-        return AppLocalizations.of(context)!
-            .serverErrorPleaseTryAgainLater;
+        return AppLocalizations.of(context)!.serverErrorPleaseTryAgainLater;
       case "ERROR_INVALID_EMAIL":
       case "invalid-email":
-        return AppLocalizations.of(context)!
-            .emailAddressIsInvalid;
+        return AppLocalizations.of(context)!.emailAddressIsInvalid;
       default:
-        return AppLocalizations.of(context)!
-            .loginFailedPleaseTryAgain;
+        return AppLocalizations.of(context)!.loginFailedPleaseTryAgain;
     }
   }
 }

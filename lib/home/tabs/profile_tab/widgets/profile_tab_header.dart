@@ -48,7 +48,6 @@ class ProfileTabHeader extends StatelessWidget {
                 children: [
                   Text(
                     context.read<UserAuthProvider>().userModel?.name ??
-                        FirebaseAuth.instance.currentUser?.displayName ??
                         'User',
                     style: CustomTextStyles.style18w700Black.copyWith(
                         color: Theme.of(context).splashColor, fontSize: 24),
@@ -57,7 +56,7 @@ class ProfileTabHeader extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    FirebaseAuth.instance.currentUser?.email ?? '',
+                    context.read<UserAuthProvider>().userModel?.email ?? '',
                     style: CustomTextStyles.style16w500Black
                         .copyWith(color: Theme.of(context).splashColor),
                   ),

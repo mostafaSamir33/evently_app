@@ -6,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseServices {
-  // static User? user = FirebaseAuth.instance.currentUser;
-
   //firebase database
   static CollectionReference<EventDataModel> getEventsCollection() {
     CollectionReference<EventDataModel> eventsCollection = getUsersCollection()
@@ -164,6 +162,13 @@ class FirebaseServices {
         idToken: googleAuthentication.idToken);
     final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
+
+    UserModel userModel = UserModel(
+        email: googleAccount.email,
+        name: googleAccount.displayName ?? 'no name',
+        uId: FirebaseAuth.instance.currentUser?.uid??'');
+    await addNewUser(userModel);
+
     return userCredential.user;
   }
 

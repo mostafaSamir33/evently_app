@@ -216,6 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           final user =
                               await FirebaseServices.signInWithGoogle();
                           if (user != null) {
+                            //ignore: use_build_context_synchronously
                             Navigator.of(context)
                                 .pushReplacementNamed(HomeScreen.routeName);
                           }

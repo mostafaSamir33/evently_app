@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+@pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   log("Handling a background message: ${message.messageId}");
@@ -33,11 +34,16 @@ class FCMServices {
   }
 
   static Future<String?> getToken() async {
-    String? token = await messaging.getToken(
-        vapidKey:
-            'BB5zk7v-aIOj1p5aPHpubTZXp3qHcU7NwTy6bxOt5MLl5MhpHLoxHuTBKJytCIzx3mzmqRL_UHTc5CW1qPvk8V8');
-    log('FCM token: $token');
-    return token;
+    try {
+      String? token = await messaging.getToken(
+          vapidKey:
+              'BB5zk7v-aIOj1p5aPHpubTZXp3qHcU7NwTy6bxOt5MLl5MhpHLoxHuTBKJytCIzx3mzmqRL_UHTc5CW1qPvk8V8');
+      log('FCM token: $token');
+      return token;
+    } catch (e) {
+      log('Error getting FCM token: $e');
+      return null;
+    }
   }
 
   static Future<void> handleForegroundMessages() async {

@@ -85,6 +85,8 @@ class MapTapProvider extends ChangeNotifier {
       zoom: 14.4746,
     );
 
+    markers.clear();
+
     markers.add(
       Marker(
           markerId: MarkerId('1'),
