@@ -12,29 +12,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboarding1Text1 => 'إضفاء الطابع الشخصي على تجربتك';
 
   @override
-  String get onboarding1Text2 =>
-      'اختر السمة واللغة المفضلة لديك للبدء بتجربة مريحة ومصممة خصيصًا لتناسب أسلوبك.';
+  String get onboarding1Text2 => 'اختر السمة واللغة المفضلة لديك للبدء بتجربة مريحة ومصممة خصيصًا لتناسب أسلوبك.';
 
   @override
   String get onboarding2Text1 => 'ابحث عن الأحداث التي تلهمك';
 
   @override
-  String get onboarding2Text2 =>
-      'انغمس في عالم من الفعاليات المصممة خصيصًا لتناسب اهتماماتك الفريدة. سواء كنت من محبي الموسيقى الحية، أو ورش العمل الفنية، أو التواصل المهني، أو حتى اكتشاف تجارب جديدة، فلدينا ما يناسبك. ستساعدك توصياتنا المختارة على الاستكشاف والتواصل والاستفادة القصوى من كل فرصة متاحة أمامك.';
+  String get onboarding2Text2 => 'انغمس في عالم من الفعاليات المصممة خصيصًا لتناسب اهتماماتك الفريدة. سواء كنت من محبي الموسيقى الحية، أو ورش العمل الفنية، أو التواصل المهني، أو حتى اكتشاف تجارب جديدة، فلدينا ما يناسبك. ستساعدك توصياتنا المختارة على الاستكشاف والتواصل والاستفادة القصوى من كل فرصة متاحة أمامك.';
 
   @override
   String get onboarding3Text1 => 'تخطيط الأحداث بسهولة';
 
   @override
-  String get onboarding3Text2 =>
-      'تخلص من عناء تنظيم فعالياتك مع أدواتنا المتكاملة للتخطيط. من إعداد الدعوات وإدارة الردود، إلى جدولة التذكيرات وتنسيق التفاصيل، نحن نلبي جميع احتياجاتك. خطط بسهولة وركّز على ما يهمك - اصنع تجربة لا تُنسى لك ولضيوفك.';
+  String get onboarding3Text2 => 'تخلص من عناء تنظيم فعالياتك مع أدواتنا المتكاملة للتخطيط. من إعداد الدعوات وإدارة الردود، إلى جدولة التذكيرات وتنسيق التفاصيل، نحن نلبي جميع احتياجاتك. خطط بسهولة وركّز على ما يهمك - اصنع تجربة لا تُنسى لك ولضيوفك.';
 
   @override
   String get onboarding4Text1 => 'تواصل مع الأصدقاء وشارك اللحظات';
 
   @override
-  String get onboarding4Text2 =>
-      'اجعل كل مناسبة لا تُنسى بمشاركة تجربتك مع الآخرين. تتيح لك منصتنا دعوة الأصدقاء، وإبقاء الجميع على اطلاع، والاحتفال باللحظات معًا. صوّر لحظات الإثارة وشاركها مع أصدقائك، لتستعيد لحظاتها المميزة وتعتز بالذكريات.';
+  String get onboarding4Text2 => 'اجعل كل مناسبة لا تُنسى بمشاركة تجربتك مع الآخرين. تتيح لك منصتنا دعوة الأصدقاء، وإبقاء الجميع على اطلاع، والاحتفال باللحظات معًا. صوّر لحظات الإثارة وشاركها مع أصدقائك، لتستعيد لحظاتها المميزة وتعتز بالذكريات.';
 
   @override
   String get language => 'اللغة';
@@ -99,8 +95,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get thisFieldMustBeTheSameAsThePasswordField =>
-      'يجب أن يكون هذا الحقل هو نفسه حقل كلمة المرور';
+  String get thisFieldMustBeTheSameAsThePasswordField => 'يجب أن يكون هذا الحقل هو نفسه حقل كلمة المرور';
 
   @override
   String get userRegesteredSuccessfully => 'تم تسجيل المستخدم بنجاح';
@@ -217,32 +212,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get theEventIsDeletedSuccessfully => 'تم حذف الحدث بنجاح';
 
   @override
-  String get emailAlreadyUsedGoToLoginPage =>
-      'تم استخدام البريد الإلكتروني. انتقل إلى صفحة تسجيل الدخول.';
+  String get emailAlreadyUsedGoToLoginPage => 'تم استخدام البريد الإلكتروني. انتقل إلى صفحة تسجيل الدخول.';
 
   @override
-  String get wrongEmailPasswordCombination =>
-      'مزيج خاطئ من البريد الإلكتروني وكلمة المرور.';
+  String get wrongEmailPasswordCombination => 'مزيج خاطئ من البريد الإلكتروني وكلمة المرور.';
 
   @override
-  String get noUserFoundWithThisEmail =>
-      'لم يتم العثور على مستخدم بهذا البريد الإلكتروني.';
+  String get noUserFoundWithThisEmail => 'لم يتم العثور على مستخدم بهذا البريد الإلكتروني.';
 
   @override
   String get userDisabled => 'تم تعطيل المستخدم.';
 
   @override
-  String get tooManyRequestsToLogIntoThisAccount =>
-      'هناك الكثير من الطلبات لتسجيل الدخول إلى هذا الحساب.';
+  String get tooManyRequestsToLogIntoThisAccount => 'هناك الكثير من الطلبات لتسجيل الدخول إلى هذا الحساب.';
 
   @override
-  String get serverErrorPleaseTryAgainLater =>
-      'خطأ في الخادم، يرجى المحاولة مرة أخرى لاحقًا.';
+  String get serverErrorPleaseTryAgainLater => 'خطأ في الخادم، يرجى المحاولة مرة أخرى لاحقًا.';
 
   @override
   String get emailAddressIsInvalid => 'عنوان البريد الإلكتروني غير صالح.';
 
   @override
-  String get loginFailedPleaseTryAgain =>
-      'فشل تسجيل الدخول. يُرجى المحاولة مرة أخرى.';
+  String get loginFailedPleaseTryAgain => 'فشل تسجيل الدخول. يُرجى المحاولة مرة أخرى.';
 }

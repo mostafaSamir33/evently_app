@@ -55,6 +55,7 @@ class _EventCardMapTabState extends State<EventCardMapTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
+                    width: width * 0.39,
                     child: Text(
                       widget.eventDataModel.title,
                       style: CustomTextStyles.style14w700White
@@ -62,7 +63,6 @@ class _EventCardMapTabState extends State<EventCardMapTab> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    width: width * 0.39,
                   ),
                   Row(
                     spacing: 4,

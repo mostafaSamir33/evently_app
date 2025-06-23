@@ -105,6 +105,8 @@ class _MapTabState extends State<MapTab> {
                           onPressed: () async {
                             await AppSettings.openAppSettings();
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.mainColor),
                           child: Text(
                             'open app settings',
                             style: Theme.of(context)
@@ -112,8 +114,6 @@ class _MapTabState extends State<MapTab> {
                                 .titleLarge!
                                 .copyWith(color: Theme.of(context).splashColor),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.mainColor),
                         )
                       ],
                     ),

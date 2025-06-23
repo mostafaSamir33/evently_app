@@ -222,11 +222,11 @@ class _EditEventScreenState extends State<EditEventScreen> {
                           decoration: BoxDecoration(
                               color: AppColors.mainColor,
                               borderRadius: BorderRadius.circular(8)),
+                          padding: EdgeInsets.all(12),
                           child: Icon(
                             Icons.my_location,
                             color: Theme.of(context).scaffoldBackgroundColor,
                           ),
-                          padding: EdgeInsets.all(12),
                         ),
                         SizedBox(
                           width: 8,

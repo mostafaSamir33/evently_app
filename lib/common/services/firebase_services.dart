@@ -152,9 +152,9 @@ class FirebaseServices {
   }
 
 //login with google
-  static signInWithGoogle() async {
+  static Future<User?>? signInWithGoogle() async {
     GoogleSignInAccount? googleAccount = await GoogleSignIn().signIn();
-    if (googleAccount == null) return;
+    if (googleAccount == null) return null;
     GoogleSignInAuthentication googleAuthentication =
         await googleAccount.authentication;
     OAuthCredential credential = GoogleAuthProvider.credential(

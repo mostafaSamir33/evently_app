@@ -46,12 +46,12 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
         underline: SizedBox.shrink(),
         items: [
           DropdownMenuItem(
-            child: Text(widget.item1Text),
             value: 'ar',
+            child: Text(widget.item1Text),
           ),
           DropdownMenuItem(
-            child: Text(widget.item2Text),
             value: 'en',
+            child: Text(widget.item2Text),
           )
         ],
         onChanged: (value) => widget.onChanged(value ?? ''),

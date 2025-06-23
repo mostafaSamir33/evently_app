@@ -12,29 +12,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboarding1Text1 => 'Personalize Your Experience';
 
   @override
-  String get onboarding1Text2 =>
-      'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.';
+  String get onboarding1Text2 => 'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.';
 
   @override
   String get onboarding2Text1 => 'Find Events That Inspire You';
 
   @override
-  String get onboarding2Text2 =>
-      'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.';
+  String get onboarding2Text2 => 'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.';
 
   @override
   String get onboarding3Text1 => 'Effortless Event Planning';
 
   @override
-  String get onboarding3Text2 =>
-      'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.';
+  String get onboarding3Text2 => 'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.';
 
   @override
   String get onboarding4Text1 => 'Connect with Friends & Share Moments';
 
   @override
-  String get onboarding4Text2 =>
-      'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.';
+  String get onboarding4Text2 => 'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.';
 
   @override
   String get language => 'Language';
@@ -99,8 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get thisFieldMustBeTheSameAsThePasswordField =>
-      'This field must be the same as the password field';
+  String get thisFieldMustBeTheSameAsThePasswordField => 'This field must be the same as the password field';
 
   @override
   String get userRegesteredSuccessfully => 'User Regestered Successfully';
@@ -214,16 +209,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get theEventIsEditedSuccessfully => 'The Event Is Edited Successfully';
 
   @override
-  String get theEventIsDeletedSuccessfully =>
-      'The Event Is Deleted Successfully';
+  String get theEventIsDeletedSuccessfully => 'The Event Is Deleted Successfully';
 
   @override
-  String get emailAlreadyUsedGoToLoginPage =>
-      'Email already used. Go to login page.';
+  String get emailAlreadyUsedGoToLoginPage => 'Email already used. Go to login page.';
 
   @override
-  String get wrongEmailPasswordCombination =>
-      'Wrong email/password combination.';
+  String get wrongEmailPasswordCombination => 'Wrong email/password combination.';
 
   @override
   String get noUserFoundWithThisEmail => 'No user found with this email.';
@@ -232,12 +224,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get userDisabled => 'User disabled.';
 
   @override
-  String get tooManyRequestsToLogIntoThisAccount =>
-      'Too many requests to log into this account.';
+  String get tooManyRequestsToLogIntoThisAccount => 'Too many requests to log into this account.';
 
   @override
-  String get serverErrorPleaseTryAgainLater =>
-      'Server error, please try again later.';
+  String get serverErrorPleaseTryAgainLater => 'Server error, please try again later.';
 
   @override
   String get emailAddressIsInvalid => 'Email address is invalid.';
