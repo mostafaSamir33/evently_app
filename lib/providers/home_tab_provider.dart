@@ -1,9 +1,6 @@
 import 'package:evently/models/category_slider_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../common/services/firebase_services.dart';
-import '../models/user_model.dart';
 
 class HomeTabProvider extends ChangeNotifier {
   CategoryValues? selectedCategory = CategoryValues.all;

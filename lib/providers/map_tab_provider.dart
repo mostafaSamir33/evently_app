@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:evently/common/app_constants.dart';
 import 'package:evently/common/app_prefs.dart';
