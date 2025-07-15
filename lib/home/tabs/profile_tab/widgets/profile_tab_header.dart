@@ -47,8 +47,7 @@ class ProfileTabHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    context.read<UserAuthProvider>().userModel?.name ??
-                        'User',
+                    context.watch<UserAuthProvider>().userModel?.name ?? 'User',
                     style: CustomTextStyles.style18w700Black.copyWith(
                         color: Theme.of(context).splashColor, fontSize: 24),
                   ),
@@ -56,7 +55,7 @@ class ProfileTabHeader extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    context.read<UserAuthProvider>().userModel?.email ?? '',
+                    context.watch<UserAuthProvider>().userModel?.email ?? '',
                     style: CustomTextStyles.style16w500Black
                         .copyWith(color: Theme.of(context).splashColor),
                   ),

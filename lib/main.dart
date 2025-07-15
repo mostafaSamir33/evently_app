@@ -9,7 +9,6 @@ import 'package:evently/events/screens/create_event_screen.dart';
 import 'package:evently/events/screens/edit_event_screen.dart';
 import 'package:evently/events/screens/pick_location_screen.dart';
 import 'package:evently/home/screens/home_screen.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:evently/onboarding/screens/onboarding_screen_1.dart';
