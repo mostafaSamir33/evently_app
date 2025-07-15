@@ -6,7 +6,6 @@ import 'package:evently/common/widgets/custom_main_button.dart';
 import 'package:evently/events/screens/pick_location_screen_for_edit_event.dart';
 import 'package:evently/events/widgets/custom_text_field.dart';
 import 'package:evently/home/screens/home_screen.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event_data_model.dart';
 import 'package:evently/providers/create_event_screen_provider.dart';

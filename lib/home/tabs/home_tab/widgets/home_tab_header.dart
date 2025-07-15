@@ -1,4 +1,3 @@
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:evently/common/app_constants.dart';
 import 'package:evently/common/app_prefs.dart';
 import 'package:evently/l10n/app_localizations.dart';
@@ -8,7 +7,6 @@ import 'package:evently/providers/localization_provider.dart';
 import 'package:evently/providers/map_tab_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
 import 'package:evently/providers/user_auth_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
