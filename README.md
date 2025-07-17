@@ -15,8 +15,7 @@ supporting **Light Mode and Dark Mode**.
 
 - watch this video:
 
-https://www.loom.com/share/5d80bb341ae348c8be8fd865f834a2f5?sid=cf0c963a-f43b-48e4-b1c2-1e52d52c7bbc
-
+https://www.loom.com/share/894c2934f61c4f23875943c2712040d2?sid=873c1ea1-36a7-41bc-a1c3-0ae78a1c7488
 ---
 
 ## 📱 Features
